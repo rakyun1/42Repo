@@ -490,4 +490,19 @@ int	main(void)
 	printf("original :: %s\n", source6);
 	printf("custom   :: %s\n\n", source7);
 
+//	ft_strlcpy
+	printf("\n\n<<< TEST RESULT (ft_strlcpy) >>>\n");
+	char	dst_cpy[20];
+	const char	src_cpy[] = "Hello_world";
+	printf("\n\nTEST :: Common behavior\n");
+	printf("dst size :: %ld, src :: %s, return :: %ld, result :: %s\n", sizeof(dst_cpy), src_cpy, ft_strlcpy(dst_cpy, src_cpy, sizeof(dst_cpy)), dst_cpy);
+
+	
+	printf("\n\nTEST :: dst_size is 0\n");
+	char	dst_cpy2[10];
+	printf("dst size :: %d, src :: %s, return :: %ld, result :: %s\n", 0, src_cpy, ft_strlcpy(dst_cpy2, src_cpy, 0), dst_cpy2);
+
+
+	printf("\n\nTEST :: When the length of src is longer\n");
+	printf("dst size :: %ld, src :: Hello_world, return :: %ld, result :: %s\n", sizeof(dst_cpy2), ft_strlcpy(dst_cpy2, src_cpy, sizeof(dst_cpy2)), dst_cpy2);
 }
