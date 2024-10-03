@@ -6,7 +6,7 @@
 /*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:57:25 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/03 20:22:22 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/03 20:35:00 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 #include <stdio.h>
 #include <string.h>
-
 int main() {
     char buffer[20] = "Hello, ";
     const char *src = "World!";
