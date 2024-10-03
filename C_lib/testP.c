@@ -2,6 +2,8 @@
 #include<ctype.h>
 #include "libft.h"
 #include<string.h>
+#include<strings.h>
+
 int	main(void)
 {
 
@@ -293,9 +295,199 @@ int	main(void)
 	printf("original :: %s\n", s1);
 	printf("custom   :: %s\n", s2);
 
-	printf("\nTEST :: Undifined behavior\n");
-	memset(s1, '1', 40);
-	ft_memset(s2, '1', 40);	
-	printf("original :: %s\n", s1);
-	printf("custom   :: %s\n", s2);
+//	printf("\nTEST :: Undifined behavior\n");
+//	memset(s1, '1', 40);
+//	ft_memset(s2, '1', 40);	
+//	printf("original :: %s\n", s1);
+//	printf("custom   :: %s\n", s2);
+
+
+//	ft_bzero
+	printf("\n\n<<< TEST RESULT (ft_bzero) >>>\n");
+	int s3[20];
+	int s4[20];
+	printf("\nTEST :: Common behavior\n");
+	bzero(s3, sizeof(s3));
+	ft_bzero(s4, sizeof(s4));	
+
+	for (int i = 0; i < 20; i++)
+		printf("%d ", s3[i]);
+	printf("\n");
+	for (int i = 0; i < 20; i++)
+		printf("%d ", s4[i]);
+	printf("\n");
+
+	printf("\nTEST :: Not fully filled\n");
+	memset(s3, 130, sizeof(s3));
+	ft_memset(s4, 130, sizeof(s4));
+	bzero(s3, sizeof(s3) / 2);
+	ft_bzero(s4, sizeof(s4) / 2);
+
+	for (int i = 0; i < 20; i++)
+		printf("%d ", s3[i]);
+	printf("\n");
+	for (int i = 0; i < 20; i++)
+		printf("%d ", s4[i]);
+	printf("\n");
+
+
+//	ft_memcpy
+	printf("\n\n<<< TEST RESULT (ft_memcpy) >>>\n");
+	long long src = 9223372036854775807; // long long 타입의 최대값
+	long long dest;
+	long long dest2;
+	printf("\nTEST :: The biggest number of the long long\n");
+	memcpy(&dest, &src, sizeof(long long));
+	ft_memcpy(&dest2, &src, sizeof(long long));
+	printf("original :: %lld\n", dest);
+	printf("custom   :: %lld\n", dest2);
+
+	printf("\nTEST :: Common behavior\n");
+	char src2[20];	
+	char dest3[20];
+	char dest4[20];
+
+	memset(src2, 126, sizeof(src2));
+	memcpy(dest3, &src2, sizeof(dest3));
+	ft_memcpy(dest4, &src2, sizeof(dest4));
+	printf("original :: %s\n", dest3);
+	printf("custom   :: %s\n", dest4);
+
+
+	printf("\nTEST :: Common behavior\n");
+	int src3[20];	
+	int dest5[20];
+	int dest6[20];
+
+	for (int i = 0; i < 20; i++) {
+	    src3[i] = 126;
+	}
+	memcpy(dest5, &src3, sizeof(dest5));
+	ft_memcpy(dest6, &src3, sizeof(dest6));
+
+	printf("### orginal ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dest5[i]);
+	}
+
+	printf("\n### custom ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dest6[i]);
+	}
+	
+	printf("\n\nTEST :: Not fully filled\n");
+	int src4[10];	
+
+	for (int i = 0; i < 10; i++) {
+		src4[i] = 0;
+	}
+	memcpy(dest5, &src4, sizeof(dest5));
+	ft_memcpy(dest6, &src4, sizeof(dest6));
+	printf("### orginal ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dest5[i]);
+	}
+
+	printf("\n### custom ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dest6[i]);
+	}
+
+	printf("\n\nTEST :: Undifined behavior\n");
+	char src5[20];
+	memset(src5, 45, sizeof(src5));
+	memcpy(dest5, &src5, 100);
+	ft_memcpy(dest6, &src5, 100);
+
+	printf("### orginal ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dest5[i]);
+	}
+
+	printf("\n### custom ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dest6[i]);
+	}
+	printf("\n\n");
+
+
+
+//	ft_memmove
+	printf("\n\n<<< TEST RESULT (ft_memmove) >>>\n");
+	long long dst;
+	long long dst2;
+	printf("\nTEST :: The biggest number of the long long\n");
+	memmove(&dst, &src, sizeof(long long));
+	ft_memmove(&dst2, &src, sizeof(long long));
+	printf("original :: %lld\n", dst);
+	printf("custom   :: %lld\n", dst2);
+
+	printf("\nTEST :: Common behavior\n");
+	char source2[20];	
+	char dst3[20];
+	char dst4[20];
+
+	memset(source2, 126, sizeof(src2));
+	memmove(dst3, &source2, sizeof(source2));
+	ft_memmove(dst4, &source2, sizeof(source2));
+	printf("original :: %s\n", dst3);
+	dst4[20] = '\0';
+	printf("custom   :: %s\n", dst4);
+
+
+	printf("\nTEST :: Common behavior\n");
+	int source3[20];	
+	int dst5[20];
+	int dst6[20];
+
+	for (int i = 0; i < 20; i++) {
+	    source3[i] = 126;
+	}
+	memmove(dst5, &source3, sizeof(source3));
+	ft_memmove(dst6, &source3, sizeof(source3));
+
+	printf("### orginal ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dst5[i]);
+	}
+
+	printf("\n### custom ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dst6[i]);
+	}
+	
+	printf("\n\nTEST :: Not fully filled\n");
+	int source4[10];	
+
+	for (int i = 0; i < 10; i++) {
+		source4[i] = 0;
+	}
+	memmove(dst5, &source4, sizeof(source4));
+	ft_memmove(dst6, &source4, sizeof(source4));
+	printf("### orginal ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dst5[i]);
+	}
+
+	printf("\n### custom ###\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", dst6[i]);
+	}
+
+	printf("\n\nTEST :: Overaping copy\n");
+	char source6[20];
+	char source7[20];
+	int	idx2 = 0;
+	for (int i = 65; i < 85; i++)
+	{
+		source6[idx2] = i;
+		source7[idx2++] = i;
+	}
+	printf("source   :: %s\n", source6);
+	memmove(source6, source6 + 2, 4);
+	ft_memmove(source7, source7 + 2, 4);
+
+	printf("original :: %s\n", source6);
+	printf("custom   :: %s\n\n", source7);
+
 }
