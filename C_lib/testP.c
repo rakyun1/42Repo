@@ -505,4 +505,218 @@ int	main(void)
 
 	printf("\n\nTEST :: When the length of src is longer\n");
 	printf("dst size :: %ld, src :: Hello_world, return :: %ld, result :: %s\n", sizeof(dst_cpy2), ft_strlcpy(dst_cpy2, src_cpy, sizeof(dst_cpy2)), dst_cpy2);
+
+
+
+//	ft_strlcat
+	printf("\n\n<<< TEST RESULT (ft_strlcat) >>>\n");
+	char	dst_cat[20];
+	dst_cat[0] = 'H';
+	dst_cat[1] = 'e';
+	dst_cat[2] = 'l';
+	dst_cat[3] = 'l';
+	dst_cat[4] = 'o';
+	dst_cat[5] = '\0';
+	const char	src_cat[] = ", world!";
+	printf("\n\nTEST :: Common behavior\n");
+	printf("dst total size :: %ld, dst :: Hello, src :: %s, return :: %ld, result :: %s\n", sizeof(dst_cat), src_cat, ft_strlcat(dst_cat, src_cat, sizeof(dst_cat)), dst_cat);
+
+	
+	printf("\n\nTEST :: dst is already full\n");
+	char	dst_cat2[] = "Full";
+	printf("dst size :: %ld, src :: %s, return :: %ld, result :: %s\n", sizeof(dst_cat2), src_cat, ft_strlcat(dst_cat2, src_cat, 0), dst_cat2);
+
+
+	char dst_cat3[8];
+	dst_cat3[0] = 'H'; 
+	dst_cat3[1] = 'e'; 
+	dst_cat3[2] = 'l'; 
+	dst_cat3[3] = 'l'; 
+	dst_cat3[4] = 'o'; 
+	dst_cat3[5] = '\0'; 
+	printf("\n\nTEST :: insufficient length of dst\n");
+	printf("dst total size :: %ld, dst :: Hello, src :: , world!, return :: %ld, result :: %s\n", sizeof(dst_cat3), ft_strlcat(dst_cat3, src_cat, sizeof(dst_cat3)), dst_cat3);
+
+
+//	ft_toupper
+	printf("\n\n<<< TEST RESULT (ft_toupper) >>>\n");
+	printf("input :: a, output :: %c\n\n", ft_toupper('a'));
+	printf("input :: z, output :: %c\n\n", ft_toupper('z'));
+	printf("input :: B, output :: %c\n\n", ft_toupper('B'));
+	printf("input :: 10, output :: %c\n\n", ft_toupper(10));
+
+//	ft_tolower
+	printf("\n\n<<< TEST RESULT (ft_tolower) >>>\n");
+	printf("input :: a, output :: %c\n\n", ft_tolower('a'));
+	printf("input :: z, output :: %c\n\n", ft_tolower('z'));
+	printf("input :: B, output :: %c\n\n", ft_tolower('B'));
+	printf("input :: 10, output :: %c\n\n", ft_tolower(10));
+
+
+//	ft_strchr
+	printf("\n\n<<< TEST RESULT (ft_strchr) >>>\n");
+	char src_chr[] = "Hello, world!";
+	printf("\n\nTEST :: Common behavior\n");
+	printf("src :: <%s>, char :: <,> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, ','));
+	printf("src :: <%s>, char :: < > result :: <%s>\n\n", src_chr, ft_strchr(src_chr, ' '));
+	printf("src :: <%s>, char :: <Z> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'Z'));
+	printf("src :: <%s>, char :: <E> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'E'));
+	printf("src :: <%s>, char :: <!> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, '!'));
+	printf("src :: <%s>, char :: <H> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'H'));
+
+	printf("\nTEST :: When the char is null\n");
+	printf("src :: <%s>, char :: <NULL> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, '\0'));
+
+	
+//	ft_strncmp
+	printf("\n\n<<< TEST RESULT (ft_strncmp) >>>\n\n");
+	char src_cmp[] = "Hello, world!";
+	char src_cmp2[] = "Hello, computer!";
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 6, ft_strncmp(src_cmp, src_cmp2, 6));
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 7, ft_strncmp(src_cmp, src_cmp2, 7));
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 0, ft_strncmp(src_cmp, src_cmp2, 0));
+	char src_cmp3[5];
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp3, 5, ft_strncmp(src_cmp, src_cmp3, 5));
+	src_cmp3[0] = 'H';
+	src_cmp3[1] = 'e';
+	src_cmp3[2] = 'l';
+	src_cmp3[3] = 'l';
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp3, 8, ft_strncmp(src_cmp, src_cmp3, 8));
+
+
+//	ft_memchr
+	printf("\n\n<<< TEST RESULT (ft_memchr) >>>\n\n");
+	char src_memchr[] = "Hello, world!";
+	printf("\n==== original ====\n");
+	printf("src :: <%s>, char :: w, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)memchr(src_memchr, 'w', 10));
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: w, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)ft_memchr(src_memchr, 'w', 10));
+	printf("\n======================\n");
+	
+
+	printf("\n==== original ====\n");
+	printf("src :: <%s>, char :: E, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)memchr(src_memchr, 'E', 10));
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: E, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)ft_memchr(src_memchr, 'E', 10));
+	printf("\n======================\n");
+
+	printf("\n==== original ====\n");
+	printf("src :: <%s>, char :: null, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)memchr(src_memchr, '\0', 10));
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: null, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)ft_memchr(src_memchr, '\0', 10));
+	printf("\n======================\n");
+
+	printf("\n==== original ====\n");
+	printf("src :: <%s>, char :: H, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)memchr(src_memchr, 'H', 10));
+
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: H, n :: %d, result :: <%s>\n\n", src_memchr, 10, (char *)ft_memchr(src_memchr, 'H', 10));
+	printf("\n======================\n");
+
+
+
+	printf("\n==== original ====\n");
+	printf("src :: <%s>, char :: !, n :: %d, result :: <%s>\n\n", src_memchr, 30, (char *)memchr(src_memchr, '!', 30));
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: !, n :: %d, result :: <%s>\n\n", src_memchr, 30, (char *)ft_memchr(src_memchr, '!', 30));
+	printf("\n======================\n");
+
+
+	char src_memchr2[] = "Hello, Hello, Hello";
+	printf("\n==== original ====\n");
+	printf("src :: <%s>, char :: H, n :: %d, result :: <%s>\n\n", src_memchr2, 20, (char *)memchr(src_memchr2, 'H', 20));
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: H, n :: %d, result :: <%s>\n\n", src_memchr2, 20, (char *)ft_memchr(src_memchr2, 'H', 20));
+	printf("\n======================\n");
+
+	printf("\n==== original ====\n");
+	char *temparary = (char *)memchr(src_memchr2, 'H', 0);
+	printf("src :: <%s>, char :: H, n :: %d, result :: <%s>\n\n", src_memchr2, 0, temparary ? temparary : "(null)");
+
+	printf("\n==== custom ====\n");
+	printf("src :: <%s>, char :: H, n :: %d, result :: <%s>\n\n", src_memchr2, 0, (char *)ft_memchr(src_memchr2, 'H', 0));
+	printf("\n======================\n");
+
+
+
+//	ft_memcmp
+	printf("\n\n<<< TEST RESULT (ft_memcmp) >>>\n\n");
+
+	printf("\n==== original ====\n");
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 6, memcmp(src_cmp, src_cmp2, 6));
+
+
+	printf("\n==== custom ====\n");
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 6, ft_memcmp(src_cmp, src_cmp2, 6));
+	printf("\n======================\n");
+
+
+	printf("\n==== original ====\n");
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 0, memcmp(src_cmp, src_cmp2, 0));
+
+	printf("\n==== custom ====\n");
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp2, 0, ft_memcmp(src_cmp, src_cmp2, 0));
+	printf("\n======================\n");
+
+	printf("\n==== original ====\n");
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp3, 5, memcmp(src_cmp, src_cmp3, 5));
+	
+	printf("\n==== custom ====\n");
+	printf("src1 :: <%s>, src2 :: <%s>, n :: %d, result :: <%d>\n\n", src_cmp, src_cmp3, 5, ft_memcmp(src_cmp, src_cmp3, 5));
+	printf("\n======================\n");
+
+
+	int	src_memcmp[9];
+	int	src_memcmp2[9];
+	src_memcmp[0] = 2;
+	src_memcmp[1] = 4;
+	src_memcmp[2] = 5;
+	src_memcmp[3] = 7;
+	src_memcmp[4] = 8;
+	src_memcmp[5] = 2;
+	src_memcmp[6] = 7;
+	src_memcmp2[0] = 2;
+	src_memcmp2[1] = 4;
+	src_memcmp2[2] = 5;
+	src_memcmp2[3] = 7;
+	src_memcmp2[4] = 8;
+	src_memcmp2[5] = 3;
+	src_memcmp2[6] = 6;
+	printf("**src1**\n");
+	for (int i = 0 ; i < 7; i++)
+	{
+		printf("%d ", src_memcmp[i]);
+	}
+	printf("\n**src2**\n");
+	for (int i = 0 ; i < 7; i++)
+	{
+		printf("%d ", src_memcmp2[i]);
+	}
+	printf("\n");
+	printf("\n==== original ====\n");
+	printf("n :: %d, result :: <%d>\n\n", 4, memcmp(src_memcmp, src_memcmp2, 4 * sizeof(int)));
+	
+	printf("\n==== custom ====\n");
+	printf("n :: %d, result :: <%d>\n\n", 4, ft_memcmp(src_memcmp, src_memcmp2, 4 * sizeof(int)));
+	printf("\n======================\n");
+
+	printf("\n==== original ====\n");
+	printf("n :: %d, result :: <%d>\n\n", 7, memcmp(src_memcmp, src_memcmp2, 7 * sizeof(int)));
+	
+	printf("\n==== custom ====\n");
+	printf("n :: %d, result :: <%d>\n\n", 7, ft_memcmp(src_memcmp, src_memcmp2, 7 * sizeof(int)));
+	printf("\n======================\n");
+
+
+
+
+
+
+
 }

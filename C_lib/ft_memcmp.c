@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 19:57:25 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/04 13:14:25 by rakim            ###   ########.fr       */
+/*   Created: 2024/10/04 15:52:00 by rakim             #+#    #+#             */
+/*   Updated: 2024/10/04 19:08:46 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	get_dst_len(char *dst)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	idx;
+	unsigned char	*s1_t;
+	unsigned char	*s2_t;
+	size_t			idx;
 
+	s1_t = (unsigned char *)s1;
+	s2_t = (unsigned char *)s2;
 	idx = 0;
-	while (dst[idx])
-		idx++;
-	return (idx);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	dst_idx;
-	size_t	src_idx;
-	size_t	result;
-
-	dst_idx = get_dst_len(dst);
-	src_idx = 0;
-	result = dst_idx;
-	while (dst_idx < size && src[src_idx] != '\0')
-		dst[dst_idx++] = src[src_idx++];
-	dst[dst_idx] = '\0';
-	while (src[src_idx])
-		src_idx++;
-	return (result + src_idx);
+	if (n == 0)
+		return (0);
+	while (idx < n)
+	{
+		if (s1_t[idx] != s2_t[idx])
+			return (s1_t[idx] - s2_t[idx]);
+		else
+			idx++;
+	}
+	return (0);
 }

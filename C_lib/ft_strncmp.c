@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 19:57:25 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/04 13:14:25 by rakim            ###   ########.fr       */
+/*   Created: 2024/10/04 14:41:06 by rakim             #+#    #+#             */
+/*   Updated: 2024/10/04 14:54:13 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	get_dst_len(char *dst)
+// 0 :: s1, s2 is equal until n
+// negative :: s1 is less than s2
+// positive :: s1 is greather than s2
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	idx;
 
+	if (n == 0)
+		return (0);
 	idx = 0;
-	while (dst[idx])
-		idx++;
-	return (idx);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	dst_idx;
-	size_t	src_idx;
-	size_t	result;
-
-	dst_idx = get_dst_len(dst);
-	src_idx = 0;
-	result = dst_idx;
-	while (dst_idx < size && src[src_idx] != '\0')
-		dst[dst_idx++] = src[src_idx++];
-	dst[dst_idx] = '\0';
-	while (src[src_idx])
-		src_idx++;
-	return (result + src_idx);
+	while (s1[idx] && s2[idx] && idx < n)
+	{
+		if (s1[idx] != s2[idx])
+			return (s1[idx] - s2[idx]);
+		else
+			idx++;
+	}
+	return (s1[idx] - s2[idx]);
 }
