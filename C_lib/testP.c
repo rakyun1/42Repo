@@ -3,6 +3,8 @@
 #include "libft.h"
 #include<string.h>
 #include<strings.h>
+#include <bsd/string.h>
+#include <stdlib.h>
 
 int	main(void)
 {
@@ -716,7 +718,136 @@ int	main(void)
 
 
 
+//	ft_strnstr
+	printf("\n\n<<< TEST RESULT (ft_strnstr) >>>\n\n");
+
+	char src_big[] = "Hello, world";
+	char src_little[] = "";
+	printf("\n==== When little is NULL ====\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", src_big, src_little, 6, strnstr(src_big, src_little, 6));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", src_big, src_little, 6, ft_strnstr(src_big, src_little, 6));
+	printf("\n======================\n");
+
+
+	printf("\n==== When big is NULL ====\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "", "Hello_world", 6, strnstr("", src_big, 6));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "", "Hello_world", 6, ft_strnstr("", src_big, 6));
+	printf("\n======================\n");
+
+
+	printf("\n==== When n is NULL ====\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 0, strnstr("Hello_world", "Hello", 0));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 0, ft_strnstr("Hello_world", "Hello", 0));
+	printf("\n======================\n");
+
+
+	printf("\n==== Common behavior ====\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 5, strnstr("Hello_world", "Hello", 5));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 5, ft_strnstr("Hello_world", "Hello", 5));
+	printf("\n======================\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 5, strnstr("Hello_world", "world", 15));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 15, ft_strnstr("Hello_world", "world", 15));
+	printf("\n======================\n");
+
+
+	printf("\n==== When n is not enough ====\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 3, strnstr("Hello_world", "Hello", 3));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 3, ft_strnstr("Hello_world", "Hello", 3));
+	printf("\n======================\n");
+	printf("\n==== original ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 5, strnstr("Hello_world", "world", 5));
+	printf("\n==== custom ====\n");
+	printf("big :: <%s>, little :: <%s>, n :: %d, result :: <%s>\n", "Hello_world", "Hello", 5, ft_strnstr("Hello_world", "world", 5));
+	printf("\n======================\n");
+
+
+//	ft_atoi
+	printf("\n==== original ====\n");
+	printf("input :: '   +-12345'\nresult :: %d\n\n", atoi("   +-12345"));
+	printf("input :: '   +  12345'\nresult :: %d\n\n", atoi("   +  12345"));
+	printf("input :: '   +12345'\nresult :: %d\n\n", atoi("   +12345"));
+	printf("input :: 'sdaf+12345'\nresult :: %d\n\n", atoi("sdaf+12345"));
+	printf("input :: '     12345'\nresult :: %d\n\n", atoi(" \t\n\v\f\r12345"));
+	printf("input :: '0'\nresult :: %d\n\n", atoi("0"));
+	printf("input :: '+123'\nresult :: %d\n\n", atoi("+123"));
+	printf("input :: '123abc'\nresult :: %d\n\n", atoi("123abc"));
+	printf("input :: '2147483647'\nresult :: %d\n\n", atoi("2147483647"));
+	printf("input :: '2147483648'\nresult :: %d\n\n", atoi("2147483648"));
+	printf("\n==== custom ====\n");
+	printf("input :: '   +-12345'\nresult :: %d\n\n", ft_atoi("   +-12345"));
+	printf("input :: '   +  12345'\nresult :: %d\n\n", ft_atoi("   +  12345"));
+	printf("input :: '   +12345'\nresult :: %d\n\n", ft_atoi("   +12345"));
+	printf("input :: 'sdaf+12345'\nresult :: %d\n\n", ft_atoi("sdaf+12345"));
+	printf("input :: '     12345'\nresult :: %d\n\n", ft_atoi(" \t\n\v\f\r12345"));
+	printf("input :: '0'\nresult :: %d\n\n", ft_atoi("0"));
+	printf("input :: '+123'\nresult :: %d\n\n", ft_atoi("+123"));
+	printf("input :: '123abc'\nresult :: %d\n\n", atoi("123abc"));
+	printf("input :: '2147483647'\nresult :: %d\n\n", atoi("2147483647"));
+	printf("input :: '2147483648'\nresult :: %d\n\n", atoi("2147483648"));
 
 
 
+
+//	ft_calloc
+	printf("\n==== original ====\n");
+	int	*c = (int *)calloc(10, sizeof(int));
+	printf("first input :: 10, second input :: 4\n");
+	for (int i = 0; i < 10; i++) {
+		printf("%d ", c[i]);
+	}
+	printf("\n");
+	char	*c2 = (char *)calloc(10, sizeof(char));
+	printf("first input :: 10, second input :: 1\n");
+	printf("result :: %s\n", c2);
+
+//	int	*c4 = (int *)calloc(214747836, sizeof(int));
+//	printf("first input :: 1231231231232131231, second input :: 4\n");
+//	for (int i = 0; i < 12312312; i++) {
+//		printf("%d ", c4[i]);
+//	}
+//	printf("\n");
+
+//	int	*c6 = (int *)calloc(1231231231232131231, sizeof(int));
+//	printf("first input :: 1231231231232131231, second input :: 4\n");
+//	for (int i = 0; i < 12312312; i++) {
+//		printf("%d ", c6[i]);
+//	}
+//	printf("\n");
+	
+	printf("\n==== custom ====\n");
+	int	*c1 = (int *)ft_calloc(10, sizeof(int));
+	printf("first input :: 10, second input :: 4\n");
+	for (int i = 0; i < 10; i++) {
+		printf("%d ", c1[i]);
+	}
+	printf("\n");
+	char	*c3 = (char *)calloc(10, sizeof(char));
+	printf("first input :: 10, second input :: 1\n");
+	printf("result :: %s\n", c3);
+
+//	int	*c5 = (int *)calloc(214747836, sizeof(int));
+//	printf("first input :: 1231231231232131231, second input :: 4\n");
+//	for (int i = 0; i < 12312312; i++) {
+//		printf("%d ", c5[i]);
+//	}
+//	printf("\n");
+
+//	int	*c7 = (int *)calloc(1231231231232131231, sizeof(int));
+//	printf("first input :: 1231231231232131231, second input :: 4\n");
+//	for (int i = 0; i < 12312312; i++) {
+//		printf("%d ", c7[i]);
+//	}
+//	printf("\n");
 }

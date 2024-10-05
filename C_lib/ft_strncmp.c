@@ -6,15 +6,12 @@
 /*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:41:06 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/04 14:54:13 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/05 11:20:41 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// 0 :: s1, s2 is equal until n
-// negative :: s1 is less than s2
-// positive :: s1 is greather than s2
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	idx;
