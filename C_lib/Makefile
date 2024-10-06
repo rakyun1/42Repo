@@ -2,7 +2,7 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -std=c99
 AR = ar rcs
-SRCS = $(shell ls *.c)
+SRCS = $(shell ls *.c| grep -v -e ft_strtrim.c -e testP.c)
 OBJS = $(SRCS:.c=.o)
 HEADER = libft.h
 
