@@ -774,6 +774,7 @@ int	main(void)
 
 
 //	ft_atoi
+	printf("\n\n<<< TEST RESULT (ft_atoi) >>>\n\n");
 	printf("\n==== original ====\n");
 	printf("input :: '   +-12345'\nresult :: %d\n\n", atoi("   +-12345"));
 	printf("input :: '   +  12345'\nresult :: %d\n\n", atoi("   +  12345"));
@@ -801,6 +802,7 @@ int	main(void)
 
 
 //	ft_calloc
+	printf("\n\n<<< TEST RESULT (ft_calloc) >>>\n\n");
 	printf("\n==== original ====\n");
 	int	*c = (int *)calloc(10, sizeof(int));
 	printf("first input :: 10, second input :: 4\n");
@@ -850,4 +852,43 @@ int	main(void)
 //		printf("%d ", c7[i]);
 //	}
 //	printf("\n");
+
+
+
+//	ft_strdup
+	printf("\n\n<<< TEST RESULT (ft_strdup) >>>\n\n");
+	printf("\n==== original ====\n");
+	printf("s : %s, result :: %s\n", "Hello, world!", strdup("Hello, world!"));
+	printf("s : %s, result :: %s\n", "", strdup(""));
+	printf("s : %s, result :: %s\n", "(null)", strdup("NULL"));
+	printf("s : %s, result :: %s\n", "This\nis\ta test! 123", strdup("This\nis\ta test! 123"));
+	printf("\n==== custom ====\n");
+	printf("s : %s, result :: %s\n", "Hello, world!", ft_strdup("Hello, world!"));
+	printf("s : %s, result :: %s\n", "", ft_strdup(""));
+	printf("s : %s, result :: %s\n", "(null)", ft_strdup("NULL"));
+	printf("s : %s, result :: %s\n", "This\nis\ta test! 123", ft_strdup("This\nis\ta test! 123"));
+
+
+
+//	ft_substr
+	printf("\n\n<<< TEST RESULT (ft_substr) >>>\n\n");
+	printf("s :: %s, start :: %d, len :: %d\nresult :: %s\n\n", "Hello, world!", 7, 14, ft_substr("Hello, world!", 7, 14));
+	printf("s :: %s, start :: %d, len :: %d\nresult :: %s\n\n", "Hello, world!", 14, 7, ft_substr("Hello, world!", 14, 7));
+	printf("s :: %s, start :: %d, len :: %d\nresult :: %s\n\n", "(null)", 7, 15, ft_substr(NULL, 7, 15));
+	printf("s :: %s, start :: %d, len :: %d\nresult :: %s\n\n", "Hello, world!", 0, 4, ft_substr("Hello, world!", 0, 4));
+	printf("s :: %s, start :: %d, len :: %d\nresult :: %s\n\n", "Hello, world!", 4, 0, ft_substr("Hello, world!", 4, 0));
+	printf("s :: %s, start :: %d, len :: %d\nresult :: %s\n\n", "Hello, world!", 0, 25, ft_substr("Hello, world!", 0, 25));
+	
+
+//	ft_strjoin
+	printf("\n\n<<< TEST RESULT (ft_strjoin) >>>\n\n");
+	printf("s1 :: %s, s2 :: %s, result :: %s\n\n", "Hello, ", "world!", ft_strjoin("Hello, ", "world!"));
+	printf("s1 :: %s, s2 :: %s, result :: %s\n\n", "", "Hello, world!", ft_strjoin("", "Hello, world!"));
+	printf("s1 :: %s, s2 :: %s, result :: %s\n\n", "(null)", "Hello, world!", ft_strjoin(NULL, "Hello, world!"));
+
+
+
+
+
+
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:52:00 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/04 19:08:46 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/06 19:37:37 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,13 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 			idx++;
 	}
 	return (0);
+}
+
+#include <stdlib.h>
+#include <string.h>
+int	main(void)
+{
+	printf("%d\n", memcmp("t\200", "t\0", 2));
+	printf("%d\n", ft_memcmp("t\200", "t\0", 2));
+	return 0;
 }
