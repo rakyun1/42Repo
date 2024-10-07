@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:19:35 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/04 14:32:39 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/07 18:45:57 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 char	*ft_strchr(const char *s, int c)
 {
 	int	idx;
+	int	s_len;
 
 	idx = 0;
-	while (s[idx])
+	s_len = ft_strlen(s) + 1;
+	while (idx < s_len)
 	{
 		if (s[idx] == c)
 			return ((char *)(s + idx));
 		else
 			idx++;
 	}
-	return (NULL);
+	return (0);
 }

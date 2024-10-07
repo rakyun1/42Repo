@@ -565,6 +565,8 @@ int	main(void)
 	printf("src :: <%s>, char :: <E> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'E'));
 	printf("src :: <%s>, char :: <!> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, '!'));
 	printf("src :: <%s>, char :: <H> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'H'));
+	printf("src :: <%s>, char :: <'null'> result :: <%s>\n\n", "", ft_strchr("", '\0'));
+	printf("src :: <%s>, char :: <'null'> result :: <%s>\n\n", "", strchr("", '\0'));
 
 	printf("\nTEST :: When the char is null\n");
 	printf("src :: <%s>, char :: <NULL> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, '\0'));

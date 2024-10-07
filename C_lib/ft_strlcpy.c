@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:13:47 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/03 19:53:03 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/07 18:53:48 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 	src_idx = 0;
 	dst_idx = 0;
-	while (src[src_idx] != '\0' && src_idx < (int)size)
-		dst[dst_idx++] = src[src_idx++];
-	dst[dst_idx] = '\0';
+	if (size > 0)
+	{
+		while (src[src_idx] != '\0' && src_idx < (int)(size - 1))
+			dst[dst_idx++] = src[src_idx++];
+		dst[dst_idx] = '\0';
+	}
 	while (src[src_idx] != '\0')
 		src_idx++;
 	return (src_idx);
