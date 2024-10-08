@@ -5,6 +5,33 @@
 #include<strings.h>
 #include <bsd/string.h>
 #include <stdlib.h>
+#include <string.h>
+
+int     check_arrs(char **arr, char **ans)
+{
+        int     i;
+
+        i = 0;
+        while (arr[i] != NULL)
+        {
+                if (strcmp(arr[i], ans[i]) != 0)
+                        return (0);
+                i++;
+        }
+        if (arr[i] != ans[i])
+                return (0);
+        return (1);
+}
+void change_to_uppercase(unsigned int i, char *c)
+{
+    if (*c >= 'a' && *c <= 'z')
+        *c = *c - 32;
+}
+
+char add_index(unsigned int index, char c)
+{
+    return c + index;  // 인덱스를 ASCII 값에 더함
+}
 
 int	main(void)
 {
@@ -889,6 +916,84 @@ int	main(void)
 	printf("s1 :: %s, s2 :: %s, result :: %s\n\n", "(null)", "Hello, world!", ft_strjoin(NULL, "Hello, world!"));
 
 
+// ft_split
+	printf("\n\n<<< TEST RESULT (ft_split) >>>\n\n");
+	char    *s = "       show   me   the   money    ";
+	char    **ans1 = ((char*[5]){"show", "me", "the", "money", NULL});
+	char    **r1 = ft_split(s, ' ');
+	if (!check_arrs(r1, ans1))
+			printf("==ft_split test 1 fail.==\n");
+	else
+			printf("  ft_split test 1 Pass.\n");
+	char    *s20 = "       show";
+	char    **ans2 = ((char*[2]){"show", NULL});
+	char    **r2 = ft_split(s20, ' ');
+	if (!check_arrs(r2, ans2))
+			printf("==ft_split test 2 fail.==\n");
+	else
+			printf("  ft_split test 2 Pass.\n");
+	char    *s30 = "show      ";
+	char    **ans3 = ((char*[2]){"show", NULL});
+	char    **r3 = ft_split(s30, ' ');
+	if (!check_arrs(r3, ans3))
+			printf("==ft_split test 3 fail.==\n");
+	else
+			printf("  ft_split test 3 Pass.\n");
+	char    *s40 = "";
+	char    **ans4 = ((char*[2]){NULL});
+	char    **r4 = ft_split(s40, ' ');
+	if (!check_arrs(r4, ans4))
+			printf("==ft_split test 4 fail.==\n");
+	else
+			printf("  ft_split test 4 Pass.\n");
+
+
+// ft_itoa
+	printf("\n\n<<< TEST RESULT (ft_itoa) >>>\n\n");
+	printf("input :: -2147483648, result :: %s\n", ft_itoa(-2147483648));
+	printf("input :: 0, result :: %s\n", ft_itoa(0));
+	printf("input :: -0, result :: %s\n", ft_itoa(-0));
+	printf("input :: -2134, result :: %s\n", ft_itoa(-2134));
+	printf("input :: 2134, result :: %s\n", ft_itoa(-2134));
+
+
+// ft_strmapi
+	printf("\n\n<<< TEST RESULT (ft_strmapi) >>>\n\n");
+
+    char *str = "hello";
+    char *result = ft_strmapi(str, add_index);
+	printf("Original string: %s\n", str);
+	printf("Transformed string: %s\n\n", result);
+
+	printf("Original string: %s\n", "abc");
+	printf("Transformed string: %s\n\n", ft_strmapi("abc", add_index));
+
+	printf("Original string: %s\n", "A1b2");
+	printf("Transformed string: %s\n\n", ft_strmapi("A1b2", add_index));
+
+	printf("Original string: %s\n", "");
+	printf("Transformed string: %s\n\n", ft_strmapi("", add_index));
+
+	printf("Original string: %s\n", "!@#");
+	printf("Transformed string: %s\n\n", ft_strmapi("!@#", add_index));
+
+// ft_strmapi
+	printf("\n\n<<< TEST RESULT (ft_strmapi) >>>\n\n");
+
+	char str4[] = "hello";
+	printf("Original string: %s\n", str4);
+	ft_striteri(str4, change_to_uppercase);
+	printf("Transformed string: %s\n\n", str4);
+
+	char str2[] = "IAMRAK";
+	printf("Original string: %s\n", str2);
+	ft_striteri(str2, change_to_uppercase);
+	printf("Transformed string: %s\n\n", str2);
+
+	char str3[] = "\0";
+	printf("Original string: %s\n", str3);
+	ft_striteri(str3, change_to_uppercase);
+	printf("Transformed string: %s\n\n", str3);
 
 
 
