@@ -7,6 +7,28 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+void print_list(t_list *list) {
+    while (list) {
+        printf("%d -> ", *(int *)list->content);
+        list = list->next;
+    }
+    printf("NULL\n");
+}
+
+// 노드의 내용을 삭제하는 함수
+void delete_content(void *content) {
+    free(content);
+}
+
+void *double_value(void *content)
+{
+    int *result = malloc(sizeof(int));
+    if (result)
+        *result = (*(int *)content) * 2;
+    return result;
+}
+
 int     check_arrs(char **arr, char **ans)
 {
         int     i;
@@ -995,7 +1017,49 @@ int	main(void)
 	ft_striteri(str3, change_to_uppercase);
 	printf("Transformed string: %s\n\n", str3);
 
+// ft_lstadd_back
+	printf("\n\n<<< TEST RESULT (ft_lstadd_back) >>>\n\n");
+	t_list *e = ft_lstnew((void *)"one");
+	t_list *e1 = ft_lstnew((void *)"two");
+	t_list *e2 = ft_lstnew((void *)"three");
+	t_list *e3 = ft_lstnew((void *)"four");
 
+	e->next = e1;
+	e1->next = e2;
+	e2->next = e3;
+	t_list *e_end = ft_lstnew((void *)"last");	
+	ft_lstadd_back(&e, e_end);
+	printf("%s\n", (char *)e3->next->content);
+
+// ft_lstmap.c
+
+    t_list *list = malloc(sizeof(t_list));
+    int *val1 = malloc(sizeof(int));
+    *val1 = 1;
+    list->content = val1;
+
+    t_list *second = malloc(sizeof(t_list));
+    int *val2 = malloc(sizeof(int));
+    *val2 = 2;
+    list->next = second;
+    second->content = val2;
+
+    t_list *third = malloc(sizeof(t_list));
+    int *val3 = malloc(sizeof(int));
+    *val3 = 3;
+    second->next = third;
+    third->content = val3;
+
+    third->next = NULL;
+
+    // 리스트 출력
+    printf("Original list: ");
+    print_list(list);
+
+    // ft_lstmap 사용
+    t_list *new_list = ft_lstmap(list, double_value, delete_content);
+    printf("\nNew list after ft_lstmap: ");
+    print_list(new_list);
 
 
 }

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 14:06:48 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/09 19:59:52 by rakim            ###   ########.fr       */
+/*   Created: 2024/10/09 10:38:44 by rakim             #+#    #+#             */
+/*   Updated: 2024/10/09 14:15:56 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	size_t			idx;
-	unsigned char	*t_dest;
-	unsigned char	*t_src;
+	t_list	*temp;
 
-	idx = -1;
-	t_dest = (unsigned char *)dest;
-	t_src = (unsigned char *)src;
-	while (++idx < n)
-		t_dest[idx] = t_src[idx];
-	return (dest);
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	temp = *lst;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
 }
