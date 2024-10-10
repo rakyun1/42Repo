@@ -381,6 +381,13 @@ int	main(void)
 		printf("%d ", s4[i]);
 	printf("\n");
 
+	char test[] = "\0";
+	printf("\nTEST :: When src is null\n");
+	memset(test, 130, sizeof(s3));
+	printf("%s\n", test);
+	ft_memset(test, 130, sizeof(s3));
+	printf("%s\n", test);
+
 
 //	ft_memcpy
 	printf("\n\n<<< TEST RESULT (ft_memcpy) >>>\n");
@@ -611,6 +618,7 @@ int	main(void)
 	printf("src :: <%s>, char :: <,> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, ','));
 	printf("src :: <%s>, char :: < > result :: <%s>\n\n", src_chr, ft_strchr(src_chr, ' '));
 	printf("src :: <%s>, char :: <Z> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'Z'));
+	printf("origianl :: src :: <%s>, char :: <Z> result :: <%s>\n\n", src_chr, strchr(src_chr, 'Z'));
 	printf("src :: <%s>, char :: <E> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'E'));
 	printf("src :: <%s>, char :: <!> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, '!'));
 	printf("src :: <%s>, char :: <H> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, 'H'));
@@ -619,6 +627,7 @@ int	main(void)
 
 	printf("\nTEST :: When the char is null\n");
 	printf("src :: <%s>, char :: <NULL> result :: <%s>\n\n", src_chr, ft_strchr(src_chr, '\0'));
+	printf("original :: src :: <%s>, char :: <NULL> result :: <%s>\n\n", src_chr, strchr(src_chr, '\0'));
 
 	
 //	ft_strncmp
