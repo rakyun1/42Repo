@@ -6,14 +6,14 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:05:13 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/09 20:36:31 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/10 14:45:08 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-void	free_all(t_list *new_lst, void (*del)(void *))
+void	free_all_lst(t_list *new_lst, void (*del)(void *))
 {
 	t_list	*temp;
 
@@ -40,7 +40,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		new_node = ft_lstnew(f(lst->content));
 		if (!new_node)
 		{
-			free_all(new_lst, del);
+			free_all_lst(new_lst, del);
 			return (NULL);
 		}
 		new_node->next = NULL;
