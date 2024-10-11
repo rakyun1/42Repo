@@ -16,7 +16,6 @@ void print_list(t_list *list) {
     printf("NULL\n");
 }
 
-// 노드의 내용을 삭제하는 함수
 void delete_content(void *content) {
     free(content);
 }
@@ -52,7 +51,7 @@ void change_to_uppercase(unsigned int i, char *c)
 
 char add_index(unsigned int index, char c)
 {
-    return c + index;  // 인덱스를 ASCII 값에 더함
+    return c + index;
 }
 
 int	main(void)
@@ -101,6 +100,18 @@ int	main(void)
 	}
 	else
 		printf("'B' :: correct\n\n");
+	if (isalpha('\0') != ft_isalpha('\0'))
+	{
+		printf("null :: error\n");
+		printf("original :: %d\n", isalpha('\0'));
+		printf("custom :: %d\n\n", ft_isalpha('\0'));
+	}
+	else
+	{
+		printf("null :: same result\n\n");
+		printf("original :: %d\n", isalpha('\0'));
+		printf("custom :: %d\n\n", ft_isalpha('\0'));
+	}
 
 //	ft_isdigit
 	printf("\n\n<<< TEST RESULT (ft_isdigit) >>>\n");
@@ -145,7 +156,18 @@ int	main(void)
 	}
 	else
 		printf("'B' :: correct\n\n");
-
+	if (isdigit('\0') != ft_isdigit('\0'))
+	{
+		printf("null :: error\n");
+		printf("original :: %d\n", isdigit('\0'));
+		printf("custom :: %d\n\n", ft_isdigit('\0'));
+	}
+	else
+	{
+		printf("null :: same result\n\n");
+		printf("original :: %d\n", isdigit('\0'));
+		printf("custom :: %d\n\n", ft_isdigit('\0'));
+	}
 
 //	ft_isalnum
 	printf("\n\n<<< TEST RESULT (ft_isalnum) >>>\n");
@@ -189,7 +211,20 @@ int	main(void)
 		printf("custom :: %d\n\n", ft_isalnum('B'));
 	}
 	else
-		printf("'B' :: correct\n\n");
+		printf("null :: correct\n\n");
+	if (isalnum('\0') != ft_isalnum('\0'))
+	{
+		printf("null :: error\n");
+		printf("original :: %d\n", isalnum('\0'));
+		printf("custom :: %d\n\n", ft_isalnum('\0'));
+	}
+	else
+	{
+		printf("null :: correct\n\n");
+		printf("original :: %d\n", isalnum('\0'));
+		printf("custom :: %d\n\n", ft_isalnum('\0'));
+	}
+
 
 
 //	ft_isascii
