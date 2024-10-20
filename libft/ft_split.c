@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:10:10 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/08 16:05:17 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/19 15:14:17 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**ft_split(char const *s, char c)
 	int		result_len;
 
 	result_len = get_total_len(s, c);
-	result = (char **)malloc(sizeof(char *) * result_len + 1);
+	result = (char **)malloc(sizeof(char *) * (result_len + 1));
 	if (result == NULL)
 		return (NULL);
 	malloc_each(result, s, c, result_len);
@@ -120,3 +120,21 @@ char	**ft_split(char const *s, char c)
 	result[result_len] = NULL;
 	return (result);
 }
+//
+//#include <stdio.h>
+//int	main(void)
+//{
+//	int	idx = 0;
+//	char **result = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
+//	while(result[idx])
+//	{
+//		printf("%s\n", result[idx++]);
+//	}
+//	printf("\n\n");
+//	result = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.", 'i');
+//	idx = 0;
+//	while(result[idx])
+//	{
+//		printf("%s\n", result[idx++]);
+//	}
+//}

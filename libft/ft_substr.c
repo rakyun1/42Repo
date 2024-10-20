@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 12:52:36 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/07 19:23:36 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/19 15:03:19 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,19 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	result = (char *)malloc(len);
+	if (ft_strlen(s) < start)
+	{
+		result = (char *)malloc(1);
+		result[0] = 0;
+		return (result);
+	}
+	if (ft_strlen(s) < start + len)
+		len = ft_strlen(s) - start;
+	result = (char *)ft_calloc(len + 1, sizeof(char));
 	if (result == NULL)
 		return (NULL);
 	result_idx = 0;
 	while (s[start] && result_idx < len)
 		result[result_idx++] = s[start++];
-	result[result_idx] = '\0';
 	return (result);
 }
