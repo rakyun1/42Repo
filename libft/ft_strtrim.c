@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
+/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 14:41:54 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/07 21:04:17 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/21 08:25:51 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-int	get_last(char const *s1, char const *set, int end)
+static	int	get_last(char const *s1, char const *set, int end)
 {
 	int	set_idx;
 	int	is_change;
@@ -40,7 +40,7 @@ int	get_last(char const *s1, char const *set, int end)
 	return (end);
 }
 
-int	get_front(char const *s1, char const *set, int start)
+static	int	get_front(char const *s1, char const *set, int start)
 {
 	int	set_idx;
 	int	is_change;
@@ -48,7 +48,7 @@ int	get_front(char const *s1, char const *set, int start)
 	set_idx = 0;
 	is_change = 0;
 	while (s1[start])
-	{	
+	{
 		while (set[set_idx])
 		{
 			if (s1[start] == set[set_idx])
@@ -75,18 +75,21 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*result;
 	int		result_idx;
 
+	if ((!s1 && !set) || s1 == NULL)
+		return (NULL);
+	else if (set == NULL)
+		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	result_idx = 0;
 	front = get_front(s1, set, 0);
 	last = get_last(s1, set, (int)s1_len - 1);
 	if (last - front > 0)
 	{
-		result = (char *)malloc(sizeof(char *) * (last - front + 1));
+		result = (char *)ft_calloc((last - front + 2), sizeof(char));
 		if (result == 0)
 			return (0);
 		while (front <= last)
 			result[result_idx++] = s1[front++];
-		result[result_idx] = '\0';
 	}
 	else
 		result = ft_strdup("");

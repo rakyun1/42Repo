@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
+/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:10:10 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/19 15:14:17 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/23 14:32:57 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_all(char **result, int result_len)
 	free(result);
 }
 
-void	malloc_each(char **result, char const*s, char c, int result_len)
+void	malloc_each(char **result, char const *s, char c, int result_len)
 {
 	int	out_idx;
 	int	s_idx;
@@ -34,17 +34,17 @@ void	malloc_each(char **result, char const*s, char c, int result_len)
 	len = 0;
 	while (out_idx < result_len)
 	{
-		while (s[s_idx++] && s[s_idx] != c)
+		while (s[s_idx] && s[s_idx++] != c)
 			len++;
 		if (len > 0)
 		{
-			result[out_idx] = (char *)malloc(sizeof(char) * (len + 1));
+			result[out_idx] = (char *)ft_calloc(sizeof(char), (len + 1));
 			if (result[out_idx] == NULL)
 			{
 				free_all(result, result_len);
 				return ;
 			}
-			result[out_idx++][len] = '\0';
+			out_idx++;
 		}
 		len = 0;
 	}
@@ -110,31 +110,12 @@ char	**ft_split(char const *s, char c)
 	int		result_len;
 
 	result_len = get_total_len(s, c);
-	result = (char **)malloc(sizeof(char *) * (result_len + 1));
+	result = (char **)ft_calloc(sizeof(char *), (result_len + 1));
 	if (result == NULL)
 		return (NULL);
 	malloc_each(result, s, c, result_len);
 	if (result == NULL)
 		return (NULL);
 	copy_value(result, s, c);
-	result[result_len] = NULL;
 	return (result);
 }
-//
-//#include <stdio.h>
-//int	main(void)
-//{
-//	int	idx = 0;
-//	char **result = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
-//	while(result[idx])
-//	{
-//		printf("%s\n", result[idx++]);
-//	}
-//	printf("\n\n");
-//	result = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultricies diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi.", 'i');
-//	idx = 0;
-//	while(result[idx])
-//	{
-//		printf("%s\n", result[idx++]);
-//	}
-//}

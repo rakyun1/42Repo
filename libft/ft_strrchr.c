@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
+/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:50:57 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/07 17:07:14 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/20 16:00:07 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *s, int c)
 	s_len = ft_strlen(s);
 	while (s_len >= 0)
 	{
-		if (s[s_len] == c)
+		if (s[s_len] == (char)c)
 			return ((char *)(s + s_len));
 		else
 			s_len--;

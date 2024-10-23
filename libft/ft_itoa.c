@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
+/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:14:24 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/08 17:09:16 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/21 08:28:06 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-int	get_digit(int n)
+static	int	get_digit(int n)
 {
 	int	result;
 
@@ -28,7 +28,7 @@ int	get_digit(int n)
 	return (result);
 }
 
-void	put_num(char *result, int n, int end)
+static	void	put_num(char *result, int n, int end)
 {
 	while (n / 10 > 0)
 	{
@@ -38,30 +38,16 @@ void	put_num(char *result, int n, int end)
 	result[end] = n + '0';
 }
 
-int	check_exception(int n, char **result)
+static	int	check_exception(int n, char **result)
 {
 	if (n == 0)
 	{
-		*result = (char *)malloc(2);
-		(*result)[0] = '0';
-		(*result)[1] = '\0';
+		*result = ft_strdup("0");
 		return (1);
 	}
 	else if (n == -2147483648)
 	{
-		*result = (char *)malloc(12);
-		(*result)[0] = '-';
-		(*result)[1] = '2';
-		(*result)[2] = '1';
-		(*result)[3] = '4';
-		(*result)[4] = '7';
-		(*result)[5] = '4';
-		(*result)[6] = '8';
-		(*result)[7] = '3';
-		(*result)[8] = '6';
-		(*result)[9] = '4';
-		(*result)[10] = '8';
-		(*result)[11] = '\0';
+		*result = ft_strdup("-2147483648");
 		return (1);
 	}
 	return (0);
@@ -77,7 +63,9 @@ char	*ft_itoa(int n)
 	total_len = get_digit(n);
 	if (n < 0)
 	{
-		result = (char *)malloc(total_len + 2);
+		result = (char *)ft_calloc(total_len + 2, sizeof(char));
+		if (result == NULL)
+			return (NULL);
 		result[0] = '-';
 		result[total_len + 1] = '\0';
 		if (n != -2147483648)
@@ -85,7 +73,9 @@ char	*ft_itoa(int n)
 	}
 	else
 	{
-		result = (char *)malloc(total_len + 1);
+		result = (char *)ft_calloc(total_len + 1, sizeof(char));
+		if (result == NULL)
+			return (NULL);
 		result[total_len] = '\0';
 		put_num(result, n, total_len - 1);
 	}

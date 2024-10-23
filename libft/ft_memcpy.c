@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
+/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:06:48 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/09 19:59:52 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/20 16:29:58 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char	*t_dest;
 	unsigned char	*t_src;
 
-	idx = -1;
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	idx = 0;
 	t_dest = (unsigned char *)dest;
 	t_src = (unsigned char *)src;
-	while (++idx < n)
+	while (idx < n)
+	{
 		t_dest[idx] = t_src[idx];
+		idx++;
+	}
 	return (dest);
 }

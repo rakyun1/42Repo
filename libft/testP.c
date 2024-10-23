@@ -3,7 +3,6 @@
 #include "libft.h"
 #include<string.h>
 #include<strings.h>
-#include <bsd/string.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -416,12 +415,12 @@ int	main(void)
 		printf("%d ", s4[i]);
 	printf("\n");
 
-	char test[] = "\0";
-	printf("\nTEST :: When src is null\n");
-	memset(test, 130, sizeof(s3));
-	printf("%s\n", test);
-	ft_memset(test, 130, sizeof(s3));
-	printf("%s\n", test);
+//	char test[] = "\0";
+//	printf("\nTEST :: When src is null\n");
+//	memset(test, 130, sizeof(s3));
+//	printf("%s\n", test);
+//	ft_memset(test, 130, sizeof(s3));
+//	printf("%s\n", test);
 
 
 //	ft_memcpy
@@ -486,12 +485,11 @@ int	main(void)
 		printf("%d ", dest6[i]);
 	}
 
-	printf("\n\nTEST :: Undifined behavior\n");
-	char src5[20];
-	memset(src5, 45, sizeof(src5));
-	memcpy(dest5, &src5, 100);
-	ft_memcpy(dest6, &src5, 100);
-
+//	printf("\n\nTEST :: Undifined behavior\n");
+//	char src5[20];
+//	memcpy(dest5, &src5, 100);
+//	ft_memcpy(dest6, &src5, 100);
+//
 	printf("### orginal ###\n");
 	for (int i = 0; i < 20; i++) {
 		printf("%d ", dest5[i]);
@@ -518,14 +516,12 @@ int	main(void)
 	printf("\nTEST :: Common behavior\n");
 	char source2[20];	
 	char dst3[20];
-	char dst4[20];
 
-	memset(source2, 126, sizeof(src2));
-	memmove(dst3, &source2, sizeof(source2));
-	ft_memmove(dst4, &source2, sizeof(source2));
-	printf("original :: %s\n", dst3);
-	dst4[20] = '\0';
-	printf("custom   :: %s\n", dst4);
+//	memmove(dst3, &source2, sizeof(source2));
+//	ft_memmove(dst4, &source2, sizeof(source2));
+//	printf("original :: %s\n", dst3);
+//	dst4[20] = '\0';
+//	printf("custom   :: %s\n", dst4);
 
 
 	printf("\nTEST :: Common behavior\n");
@@ -1104,6 +1100,5 @@ int	main(void)
     t_list *new_list = ft_lstmap(list, double_value, delete_content);
     printf("\nNew list after ft_lstmap: ");
     print_list(new_list);
-
 
 }
