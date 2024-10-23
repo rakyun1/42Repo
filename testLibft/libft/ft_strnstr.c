@@ -6,7 +6,7 @@
 /*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 19:39:14 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/22 23:51:22 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/23 13:26:53 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (little[0] == '\0')
 		return ((char *)big);
 	little_len = ft_strlen(little);
-	if (little_len > len || !big)
-		return (NULL);
 	little_idx = 0;
-	big_idx = 0;
-	while (big_idx < len)
+	big_idx = -1;
+	while (big[++big_idx] && big_idx < len)
 	{
 		if (little[little_idx] == big[big_idx])
 		{
@@ -36,18 +34,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 					break ;
 			if (little[little_idx - 1] == big[temp - 1] && \
 			little_idx == little_len)
-				break ;
-			else
-				little_idx = 0;
+				return ((char *)(&big[big_idx]));
 		}
-		big_idx++;
+		little_idx = 0;
 	}
-	if (little_idx == little_len)
-		return ((char *)(&big[big_idx]));
 	return (NULL);
-}
-
-int	main(void)
-{
-	printf("%s\n", ft_strnstr("", "xx", 4294967295));
 }

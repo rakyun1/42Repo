@@ -1,0 +1,57 @@
+{
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "C/C++ Build",
+      "command": "/usr/bin/clang",
+      "args": [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-g",
+        "${file}",
+        "-o",
+        "${workspaceFolder}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "C/C++ Build"
+    },
+    {
+      "type": "cppbuild",
+      "label": "C/C++ Multi Build",
+      "command": "/usr/bin/clang",
+      "args": [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-g",
+        "${workspaceFolder}/*.c",
+        "-o",
+        "${workspaceFolder}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "C/C++ Multi Build"
+    },
+    {
+      "label": "execute",
+      "type": "shell",
+      "command": "./${fileBasenameNoExtension}",
+      "group": "test"
+    }
+  ],
+  "version": "2.0.0"
+}
