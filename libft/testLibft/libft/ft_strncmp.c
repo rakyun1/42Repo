@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:41:06 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/20 15:04:05 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/23 16:20:45 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	idx;
+	unsigned char	*str1_unchar;
+	unsigned char	*str2_unchar;
 
-	idx = 0;
-	while (idx < n && s1[idx] && s2[idx])
+	str1_unchar = (unsigned char *)s1;
+	str2_unchar = (unsigned char *)s2;
+	while ((*str1_unchar || *str2_unchar) && n-- > 0)
 	{
-		if ((unsigned char)s1[idx] != (unsigned char)s2[idx])
-			return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
-		else
-			idx++;
+		if (*str1_unchar != *str2_unchar)
+			return (*str1_unchar - *str2_unchar);
+		str1_unchar++;
+		str2_unchar++;
 	}
-	if (idx == n)
-		idx--;
-	return ((unsigned char)s1[idx] - (unsigned char)s2[idx]);
+	return (0);
 }

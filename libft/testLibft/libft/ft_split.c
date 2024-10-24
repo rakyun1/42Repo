@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 13:10:10 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/23 14:32:57 by rakim            ###   ########.fr       */
+/*   Created: 2024/10/24 13:19:57 by rakim             #+#    #+#             */
+/*   Updated: 2024/10/24 13:51:15 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_all(char **result, int result_len)
 	free(result);
 }
 
-void	malloc_each(char **result, char const *s, char c, int result_len)
+int	malloc_each(char **result, char const *s, char c, int result_len)
 {
 	int	out_idx;
 	int	s_idx;
@@ -42,12 +42,13 @@ void	malloc_each(char **result, char const *s, char c, int result_len)
 			if (result[out_idx] == NULL)
 			{
 				free_all(result, result_len);
-				return ;
+				return (0);
 			}
 			out_idx++;
 		}
 		len = 0;
 	}
+	return (1);
 }
 
 int	get_total_len(char const *s, char c)
@@ -113,8 +114,7 @@ char	**ft_split(char const *s, char c)
 	result = (char **)ft_calloc(sizeof(char *), (result_len + 1));
 	if (result == NULL)
 		return (NULL);
-	malloc_each(result, s, c, result_len);
-	if (result == NULL)
+	if (!malloc_each(result, s, c, result_len))
 		return (NULL);
 	copy_value(result, s, c);
 	return (result);

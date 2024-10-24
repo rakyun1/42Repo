@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rakim <rakim@student.42gyeongsan.kr>       +#+  +:+       +#+        */
+/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 14:41:54 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/21 08:25:51 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/23 16:18:38 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	result_idx = 0;
 	front = get_front(s1, set, 0);
 	last = get_last(s1, set, (int)s1_len - 1);
-	if (last - front > 0)
+	if (last - front >= 0)
 	{
 		result = (char *)ft_calloc((last - front + 2), sizeof(char));
 		if (result == 0)
