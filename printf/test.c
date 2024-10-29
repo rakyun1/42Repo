@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include<unistd.h>
+#include <fcntl.h>
 #include "ft_printf.h"
 
 int	main(void)
@@ -16,8 +18,6 @@ int	main(void)
 	ft_printf("%s\n", "world");
 
 	printf("%u\n", -214747);
-
-
 
 	return 0;
 }

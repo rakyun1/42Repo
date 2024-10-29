@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 
+# define STDOUT 1
+
 void	ft_putnbr_fd(int n, int fd);
 int		ft_printf(const char *str, ...);
 size_t	ft_strlen(const char *s);

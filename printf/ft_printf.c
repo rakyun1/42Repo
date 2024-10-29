@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 13:56:20 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/29 15:19:16 by rakim            ###   ########.fr       */
+/*   Updated: 2024/10/29 19:49:58rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,38 @@ int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	char	*temp;
+	int		str_idx;
 
 //	check_exception(str);
 
+	str_idx = 0;
 	va_start(ap, str);
-	while (*str != '\0')
+	while (str[str_idx] != '\0')
 	{
-		if (*str == '%')
+		if (str[str_idx] == '%')
 		{
-			str++;
-			if (*str == 'd' || *str == 'i')
-				ft_putnbr_fd(va_arg(ap, int), 1);
-			if (*str == 's')
+			str_idx++;
+			if (str[str_idx] == 'd' || str[str_idx] == 'i')
 			{
-				temp = va_arg(ap, char*);
-				write(1, temp, ft_strlen(temp));
+				long t = va_arg(ap, int);
+				ft_putnbr_fd(t, 1);
+
 			}
-			str++;
+			if (str[str_idx] == 's')
+			{
+				temp = va_arg(ap, char *);
+				write(STDOUT, temp, ft_strlen(temp));
+			}
+			if (str[str_idx] == 'c')
+				write(STDOUT, str, 1);
+			if (str[str_idx] == 'u')
+				ft_putnbr_fd((long)va_arg(ap, unsigned int), 1);
+			str_idx++;
 		}
 		else
 		{
-			write(1, str, 1);
-			str++;
+			write(STDOUT, &str[str_idx], 1);
+			str_idx++;
 		}
 	}
 }
