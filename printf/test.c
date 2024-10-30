@@ -43,18 +43,17 @@ int	main(void)
 	printf("original :: %X\n", 2144112);
 	ft_printf("test     :: %X\n", 2144112);
 
-
-
-
 	ft_printf("\ntest    %%========================\n");
 	printf("original :: %%\n");
 	ft_printf("test     :: %%\n");
 
-//	char *s1;
-//	char *s2;
-//	printf("%p\n", s1);
-//	printf("%p\n", s2);
-
+	ft_printf("\ntest    p========================\n");
+	char *s1 = NULL;
+	char *s2 = "asd";
+	printf("original :: %p\n", s1);
+	ft_printf("test     :: %p\n", s1);
+	printf("original :: %p\n", s2);
+	ft_printf("test     :: %p\n", s2);
 
 	return 0;
 }

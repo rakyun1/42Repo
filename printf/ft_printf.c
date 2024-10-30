@@ -27,13 +27,13 @@ int	ft_printf(const char *str, ...)
 			if (str[str_idx] == 'u')
 				ft_putnbr_fd((long)va_arg(ap, unsigned int), 1);
 			if (str[str_idx] == 'x')
-				print_in_lowercase_hexaeciaml((unsigned int)va_arg(ap, int));
+				print_in_lowercase_hexadecimal((unsigned int)va_arg(ap, int));
 			if (str[str_idx] == 'X')
-				print_in_uppercase_hexaeciaml((unsigned int)va_arg(ap, int));
+				print_in_uppercase_hexadecimal((unsigned int)va_arg(ap, int));
 			if (str[str_idx] == '%')
 				write(1, "%", 1);
-//			if (str[str_idx] == 'p')
-//				print_in_lowercase_hexaeciaml((unsigned long)va_arg(ap, void *));
+			if (str[str_idx] == 'p')
+				print_address_hexadecimal((unsigned long)va_arg(ap, void *));
 			str_idx++;
 		}
 		else
@@ -42,4 +42,5 @@ int	ft_printf(const char *str, ...)
 			str_idx++;
 		}
 	}
+	return (str_idx - 1);
 }
