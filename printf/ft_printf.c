@@ -1,17 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 13:56:20 by rakim             #+#    #+#             */
-/*   Updated: 2024/10/29 19:49:58rakim            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdarg.h>
-#include <unistd.h>
 #include "ft_printf.h"
 
 int	ft_printf(const char *str, ...)
@@ -30,20 +16,24 @@ int	ft_printf(const char *str, ...)
 		{
 			str_idx++;
 			if (str[str_idx] == 'd' || str[str_idx] == 'i')
-			{
-				long t = va_arg(ap, int);
-				ft_putnbr_fd(t, 1);
-
-			}
+				ft_putnbr_fd((long)va_arg(ap, int), 1);
 			if (str[str_idx] == 's')
 			{
 				temp = va_arg(ap, char *);
 				write(STDOUT, temp, ft_strlen(temp));
 			}
 			if (str[str_idx] == 'c')
-				write(STDOUT, str, 1);
+				write(STDOUT, (char[]){(char)va_arg(ap, int)}, 1);
 			if (str[str_idx] == 'u')
 				ft_putnbr_fd((long)va_arg(ap, unsigned int), 1);
+			if (str[str_idx] == 'x')
+				print_in_lowercase_hexaeciaml((unsigned int)va_arg(ap, int));
+			if (str[str_idx] == 'X')
+				print_in_uppercase_hexaeciaml((unsigned int)va_arg(ap, int));
+			if (str[str_idx] == '%')
+				write(1, "%", 1);
+//			if (str[str_idx] == 'p')
+//				print_in_lowercase_hexaeciaml((unsigned long)va_arg(ap, void *));
 			str_idx++;
 		}
 		else
