@@ -73,7 +73,8 @@ int	main(void)
 
 
 	char *str123 = NULL;
-	printf(" NULL %s NULL \n", str123);
+	printf("original :: NULL %s NULL \n", str123);
+	printf("test     :: NULL %s NULL \n", str123);
 
 	return 0;
 }
