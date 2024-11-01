@@ -74,7 +74,11 @@ int	main(void)
 
 	char *str123 = NULL;
 	printf("original :: NULL %s NULL \n", str123);
-	printf("test     :: NULL %s NULL \n", str123);
+	ft_printf("test     :: NULL %s NULL \n\n", str123);
+
+	// printf("original :: NULL %ONULL \n", str123);
+	// printf("%d\n", ft_printf("test     :: NULL %ONULL \n", str123));
+	// printf("asd %");
 
 	return 0;
 }
