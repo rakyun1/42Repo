@@ -6,48 +6,55 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/11 17:32:46 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/11 21:14:41 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list	make_new_node(int fd)
+void	make_new_node(int fd, t_list *current)
 {
-	t_list	result;
+	// char	*temp;
+	// int		read_size;
 
-	result.buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	result.buffer[BUFFER_SIZE] = '\0';
-	result.fd = fd;
-	result.count = 1;
-	result.next = NULL;
-	return (result);
+	// temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
+	// read_size = read(fd, temp, BUFFER_SIZE);
+	// current.buffer = NULL;
+	// if (read_size < 0)
+	// 	return (current);
+	// if (ft_strchr(temp, '\n'))
+	// while (read_size == BUFFER_SIZE)
+	// {
+	// 	temp = ft_realloc(temp, ft_strlen(temp) + BUFFER_SIZE);
+	// 	read_size = read(fd, temp2, BUFFER_SIZE);
+	// 	temp = ft_strjoin(temp, temp2);
+
+	// }
+	current->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
+	if (current->buffer == NULL)
+		return ;
+	current->fd = fd;
+	current->count = 1;
+	current->next = NULL;
 }
 
 char	*get_next_line(int fd)
 {
 	static t_list	*list;
 	t_list			current;
-	char			*result;
 	int				idx;
 
-	current = make_new_node(fd);
-	if (read(fd, current.buffer, BUFFER_SIZE) < 0)
-		return (NULL);
-	result = current.buffer;
-	if (ft_streln(result) != BUFFER_SIZE)
+	if (is_contains(fd, list))
 	{
-		while (result == NULL)
-		{
-			current.buffer = ft_realloc(current.buffer, \
-			BUFFER_SIZE * (current.count + 1));
-			if (current.buffer == NULL)
-				return (NULL);
-			current.count++;
-			if (read(fd, current.buffer, BUFFER_SIZE) < 0)
-				return (NULL);
-			result = ft_strchr(current.buffer, '\n');
-		}
+
 	}
-	return (result);
+	else
+	{
+		make_new_node(fd, &current);
+		if (current.buffer == NULL)
+			return (NULL);
+		add_node(list, current);
+		return (find_enter(&current));
+	}
+	return (current.buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:11:44 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/11 17:32:55 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/11 21:03:02 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ size_t	ft_strlen(const char *s)
 char	*ft_realloc(char *buffer, long size)
 {
 	free(buffer);
-	buffer = (char *)malloc(sizeof(char) * (size + 1));
+	buffer = (char *)malloc(sizeof(char) * size);
 	if (buffer == NULL)
 		return (NULL);
-	buffer[size] = '\0';
 	return (buffer);
 }
 
@@ -57,4 +56,41 @@ char	*ft_strjoin(char const *origin, char const *new)
 	result[result_idx] = '\0';
 	free(origin);
 	return (result);
+}
+
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	char	*result;
+	size_t	idx;
+
+	len = ft_strlen(s);
+	idx = 0;
+	result = (char *)ft_calloc(len + 1, sizeof(char));
+	if (result == NULL)
+		return (NULL);
+	while (s[idx] && idx < len)
+	{
+		result[idx] = s[idx];
+		idx++;
+	}
+	return (result);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	idx;
+	int	s_len;
+
+	idx = 0;
+	s_len = ft_strlen(s);
+	while (idx < s_len)
+	{
+		if (s[idx] == (char)c)
+			return ((char *)(s + idx));
+		idx++;
+	}
+	if (s[idx] == (char)c)
+		return ((char *)&s[idx]);
+	return (0);
 }
