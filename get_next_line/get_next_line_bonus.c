@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 12:09:09 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/11 16:54:49 by rakim            ###   ########.fr       */
+/*   Created: 2024/11/11 14:21:30 by rakim             #+#    #+#             */
+/*   Updated: 2024/11/11 15:20:38 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H 
+#include "get_next_line.h"
 
-# include <unistd.h>
-# include <stdlib.h>
 
-typedef struct s_LL
+
+int	find_fd_in(t_list *list, int fd)
 {
-	int				fd;
-	char			*buffer;
-	int				count;
-	struct s_LL		*next;
-}	t_list;
-
-char		*get_next_line(int fd);
-int			find_fd_in(t_list *list, int fd);
-char		*ft_strchr(const char *s, int c);
-char		*ft_realloc(char *buffer, long size);
-size_t		ft_strlen(const char *s);
-
-#endif
+	if (list == NULL)
+		return (-1);
+	while (list->next)
+	{
+		if (list->fd == fd)
+			return (read(fd, list->buffer, BUFFER_SIZE));
+		list = list->next;
+	}
+	return (-1);
+}
