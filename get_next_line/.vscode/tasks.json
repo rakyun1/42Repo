@@ -32,7 +32,7 @@
         "-Werror",
         "-Wextra",
         "-g",
-        "-D BUFFER_SIZE=42",
+        "-D BUFFER_SIZE=0",
         "${workspaceFolder}/*.c",
         "-o",
         "${workspaceFolder}/${fileBasenameNoExtension}"

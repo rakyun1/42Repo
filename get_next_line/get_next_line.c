@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/12 15:50:23 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/12 17:40:44 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,23 @@ static char	*find_enter_in(t_list *node)
 	int		idx;
 
 	idx = -1;
-	while (node->buffer[++idx])
+	if (ft_strchr(node->buffer, '\n'))
 	{
-		if (node->buffer[idx] == '\n')
-		{
-			result = ft_strdup(node->buffer);
-			node->buffer += (idx + 1);
-			return (result);
-		}
+		result = ft_strdup(node->buffer);
+		node->buffer += (idx + 1);
+		return (result);
 	}
 	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
 	if (!read(node->fd, temp, BUFFER_SIZE))
 	{
 		free(temp);
+		free(node->buffer_for_free);
 		return (NULL);
 	}
 	node->buffer = ft_strjoin(node->buffer, temp);
 	free(temp);
 	free(node->buffer_for_free);
+	node = NULL;
 	node->buffer_for_free = node->buffer;
 	return (find_enter_in(node));
 }
@@ -99,6 +98,7 @@ char	*get_next_line(int fd)
 {
 	static t_list	**list;
 	t_list			*new_node;
+	char			*result;
 
 	if (list == NULL)
 	{
@@ -115,5 +115,10 @@ char	*get_next_line(int fd)
 			return (NULL);
 		add_new_node(list, new_node);
 	}
-	return (find_enter_in(new_node));
+	result = find_enter_in(new_node);
+	if (result == NULL)
+		free(new_node);
+	if (!(*list))
+		free(list);
+	return (result);
 }
