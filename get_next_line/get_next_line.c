@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/12 17:40:44 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/12 17:48:42 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ static char	*find_enter_in(t_list *node)
 	{
 		free(temp);
 		free(node->buffer_for_free);
+		node = NULL;
 		return (NULL);
 	}
 	node->buffer = ft_strjoin(node->buffer, temp);
 	free(temp);
 	free(node->buffer_for_free);
-	node = NULL;
 	node->buffer_for_free = node->buffer;
 	return (find_enter_in(node));
 }
