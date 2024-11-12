@@ -1,5 +1,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
+#include <fcntl.h>
 
 int main(void)
 {
@@ -7,12 +8,14 @@ int main(void)
     // 1 == 10
     char *result = get_next_line(1);
     printf("%s\n", result);
-    result = get_next_line(1);
-    printf("%s\n", result);
-    result = get_next_line(1);
-    printf("%s\n", result);
-    result = get_next_line(1);
-    printf("%s\n", result);
+    int fd = open("test.txt", O_RDONLY);
+    result = get_next_line(fd);
+    while (result)
+    {
+        printf("%s\n", result);
+        result = get_next_line(fd);
+    }
+
     // 2 == 1000
     // get_next_line(2);
     // 3 == 200

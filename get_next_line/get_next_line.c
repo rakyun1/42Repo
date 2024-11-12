@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/12 14:25:53 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/12 15:50:23 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ static char	*find_enter_in(t_list *node)
 	char	*result;
 	int		idx;
 
-	idx = 0;
-	while (node->buffer[idx])
+	idx = -1;
+	while (node->buffer[++idx])
 	{
 		if (node->buffer[idx] == '\n')
 		{
@@ -81,12 +81,17 @@ static char	*find_enter_in(t_list *node)
 			node->buffer += (idx + 1);
 			return (result);
 		}
-		idx++;
 	}
 	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
-	read(node->fd, temp, BUFFER_SIZE);
+	if (!read(node->fd, temp, BUFFER_SIZE))
+	{
+		free(temp);
+		return (NULL);
+	}
 	node->buffer = ft_strjoin(node->buffer, temp);
 	free(temp);
+	free(node->buffer_for_free);
+	node->buffer_for_free = node->buffer;
 	return (find_enter_in(node));
 }
 
