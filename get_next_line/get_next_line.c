@@ -6,55 +6,109 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/11 21:14:41 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/12 14:25:53 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	make_new_node(int fd, t_list *current)
+static void	add_new_node(t_list **list, t_list *new_node)
 {
-	// char	*temp;
-	// int		read_size;
+	t_list	*temp;
 
-	// temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
-	// read_size = read(fd, temp, BUFFER_SIZE);
-	// current.buffer = NULL;
-	// if (read_size < 0)
-	// 	return (current);
-	// if (ft_strchr(temp, '\n'))
-	// while (read_size == BUFFER_SIZE)
-	// {
-	// 	temp = ft_realloc(temp, ft_strlen(temp) + BUFFER_SIZE);
-	// 	read_size = read(fd, temp2, BUFFER_SIZE);
-	// 	temp = ft_strjoin(temp, temp2);
-
-	// }
-	current->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
-	if (current->buffer == NULL)
+	if (*list == NULL)
+	{
+		*list = new_node;
 		return ;
-	current->fd = fd;
-	current->count = 1;
-	current->next = NULL;
+	}
+	temp = *list;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_node;
+}
+
+static t_list	*make_new_node_with(int fd)
+{
+	t_list	*result;
+	int		idx;
+
+	idx = 0;
+	result = (t_list *)malloc(1 * sizeof(t_list));
+	if (result == NULL)
+		return (NULL);
+	result->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
+	result->buffer_for_free = result->buffer;
+	if (result->buffer == NULL)
+		return (NULL);
+	while (idx < BUFFER_SIZE - 1)
+	{
+		result->buffer[idx] = '\0';
+		idx++;
+	}
+	result->fd = fd;
+	result->next = NULL;
+	return (result);
+}
+
+static t_list	*is_contains(t_list **list, int fd)
+{
+	t_list	*temp;
+
+	if (!list)
+		return (NULL);
+	temp = *list;
+	while (temp)
+	{
+		if (temp->fd == fd)
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
+}
+
+static char	*find_enter_in(t_list *node)
+{
+	char	*temp;
+	char	*result;
+	int		idx;
+
+	idx = 0;
+	while (node->buffer[idx])
+	{
+		if (node->buffer[idx] == '\n')
+		{
+			result = ft_strdup(node->buffer);
+			node->buffer += (idx + 1);
+			return (result);
+		}
+		idx++;
+	}
+	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
+	read(node->fd, temp, BUFFER_SIZE);
+	node->buffer = ft_strjoin(node->buffer, temp);
+	free(temp);
+	return (find_enter_in(node));
 }
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list;
-	t_list			current;
-	int				idx;
+	static t_list	**list;
+	t_list			*new_node;
 
-	if (is_contains(fd, list))
+	if (list == NULL)
 	{
-
-	}
-	else
-	{
-		make_new_node(fd, &current);
-		if (current.buffer == NULL)
+		list = (t_list **)malloc(sizeof(t_list *));
+		if (list == NULL)
 			return (NULL);
-		add_node(list, current);
-		return (find_enter(&current));
+		*list = NULL;
 	}
-	return (current.buffer);
+	new_node = is_contains(list, fd);
+	if (new_node == NULL)
+	{
+		new_node = make_new_node_with(fd);
+		if (new_node == NULL)
+			return (NULL);
+		add_new_node(list, new_node);
+	}
+	return (find_enter_in(new_node));
 }

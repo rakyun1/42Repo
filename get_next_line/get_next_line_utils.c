@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:11:44 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/11 21:03:02 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/12 14:24:54 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	length;
 
 	length = 0;
-	while (s[length] != '\0' || s[length] != '\n')
+	while (s[length] != '\0')
 		length++;
 	return (length);
 }
@@ -31,7 +31,7 @@ char	*ft_realloc(char *buffer, long size)
 	return (buffer);
 }
 
-char	*ft_strjoin(char const *origin, char const *new)
+char	*ft_strjoin(char *origin, char *new)
 {
 	size_t	origin_len;
 	size_t	new_len;
@@ -51,29 +51,31 @@ char	*ft_strjoin(char const *origin, char const *new)
 	while (origin[original_idx])
 		result[result_idx++] = origin[original_idx++];
 	original_idx = 0;
-	while (new[original_idx] != '\n')
+	while (new[original_idx] != '\0')
 		result[result_idx++] = new[original_idx++];
 	result[result_idx] = '\0';
-	free(origin);
 	return (result);
 }
 
 char	*ft_strdup(const char *s)
 {
-	size_t	len;
 	char	*result;
 	size_t	idx;
 
-	len = ft_strlen(s);
 	idx = 0;
-	result = (char *)ft_calloc(len + 1, sizeof(char));
+	while (s[idx] != '\n')
+		idx++;
+	result = (char *)malloc((idx + 2) * sizeof(char));
 	if (result == NULL)
 		return (NULL);
-	while (s[idx] && idx < len)
+	idx = 0;
+	while (s[idx] != '\n')
 	{
 		result[idx] = s[idx];
 		idx++;
 	}
+	result[idx++] = '\n';
+	result[idx] = '\0';
 	return (result);
 }
 

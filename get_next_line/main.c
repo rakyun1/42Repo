@@ -7,6 +7,12 @@ int main(void)
     // 1 == 10
     char *result = get_next_line(1);
     printf("%s\n", result);
+    result = get_next_line(1);
+    printf("%s\n", result);
+    result = get_next_line(1);
+    printf("%s\n", result);
+    result = get_next_line(1);
+    printf("%s\n", result);
     // 2 == 1000
     // get_next_line(2);
     // 3 == 200
