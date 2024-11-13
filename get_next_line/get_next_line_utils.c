@@ -6,15 +6,15 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:11:44 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/12 17:31:51 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/13 17:27:50 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	length;
+	int	length;
 
 	length = 0;
 	while (s[length] != '\0')
@@ -48,29 +48,25 @@ char	*ft_strjoin(char *origin, char *new)
 	return (result);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s, int enter_place)
 {
 	char	*result;
-	size_t	idx;
+	int		idx;
 
-	idx = 0;
-	while (s[idx] != '\n')
-		idx++;
-	result = (char *)malloc((idx + 2) * sizeof(char));
+	result = (char *)malloc((enter_place + 1) * sizeof(char));
 	if (result == NULL)
 		return (NULL);
 	idx = 0;
-	while (s[idx] != '\n')
+	while (idx < enter_place)
 	{
 		result[idx] = s[idx];
 		idx++;
 	}
-	result[idx++] = '\n';
 	result[idx] = '\0';
 	return (result);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
 	int	idx;
 	int	s_len;
@@ -80,10 +76,36 @@ char	*ft_strchr(const char *s, int c)
 	while (idx < s_len)
 	{
 		if (s[idx] == (char)c)
-			return ((char *)(s + idx));
+			return (idx);
 		idx++;
 	}
 	if (s[idx] == (char)c)
-		return ((char *)&s[idx]);
+		return (idx);
 	return (0);
+}
+
+void	del_one(t_list ***list, t_list *target)
+{
+	t_list	*temp;
+
+	if (!list || !target)
+		return ;
+	free(target->buffer_for_free);
+	if ((**list)->fd == target->fd)
+	{
+		**list = target->next;
+		free(target);
+		if (**list == NULL)
+		{
+			free(*list);
+			*list = NULL;
+		}
+		return ;
+	}
+	temp = **list;
+	while (temp->next->fd != target->fd)
+		temp = temp->next;
+	temp->next = target->next;
+	free(target);
+	target = NULL;
 }

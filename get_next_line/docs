@@ -1,3 +1,6 @@
+
+valgrind --leak-check=full --show-leak-kinds=all
+
 MANDATORY PART
 
 - get_next_line() 함수를 반복적으로 호출(예: 루프 사용)하면 파일 설명자가 가리키는 텍스트 파일을 한 번에 한 줄씩 읽을 수 있어야 합니다.

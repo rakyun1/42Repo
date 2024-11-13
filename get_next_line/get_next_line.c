@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/12 17:48:42 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/13 18:49:31 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static t_list	*make_new_node_with(int fd)
 	if (result == NULL)
 		return (NULL);
 	result->buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
-	result->buffer_for_free = result->buffer;
 	if (result->buffer == NULL)
 		return (NULL);
-	while (idx < BUFFER_SIZE - 1)
+	result->buffer_for_free = result->buffer;
+	while (idx < BUFFER_SIZE)
 	{
 		result->buffer[idx] = '\0';
 		idx++;
@@ -68,27 +68,27 @@ static t_list	*is_contains(t_list **list, int fd)
 
 static char	*find_enter_in(t_list *node)
 {
-	char	*temp;
 	char	*result;
 	int		idx;
 
-	idx = -1;
-	if (ft_strchr(node->buffer, '\n'))
+	idx = ft_strchr(node->buffer, '\n');
+	if (idx)
 	{
-		result = ft_strdup(node->buffer);
+		result = ft_strdup(node->buffer, idx + 1);
 		node->buffer += (idx + 1);
 		return (result);
 	}
-	temp = (char *)malloc(sizeof(char) * (BUFFER_SIZE));
-	if (!read(node->fd, temp, BUFFER_SIZE))
+	idx = read(node->fd, node->temp, BUFFER_SIZE);
+	if (idx <= 0)
 	{
-		free(temp);
-		free(node->buffer_for_free);
-		node = NULL;
-		return (NULL);
+		if (node->buffer[0] == '\0')
+			return (NULL);
+		result = ft_strdup(node->buffer, ft_strlen(node->buffer));
+		node->buffer += (ft_strlen(node->buffer));
+		return (result);
 	}
-	node->buffer = ft_strjoin(node->buffer, temp);
-	free(temp);
+	node->temp[idx] = '\0';
+	node->buffer = ft_strjoin(node->buffer, node->temp);
 	free(node->buffer_for_free);
 	node->buffer_for_free = node->buffer;
 	return (find_enter_in(node));
@@ -100,6 +100,8 @@ char	*get_next_line(int fd)
 	t_list			*new_node;
 	char			*result;
 
+	if (BUFFER_SIZE == 0)
+		return (NULL);
 	if (list == NULL)
 	{
 		list = (t_list **)malloc(sizeof(t_list *));
@@ -116,9 +118,7 @@ char	*get_next_line(int fd)
 		add_new_node(list, new_node);
 	}
 	result = find_enter_in(new_node);
-	if (result == NULL)
-		free(new_node);
-	if (!(*list))
-		free(list);
+	if (new_node->buffer[0] == '\0')
+		del_one(&list, new_node);
 	return (result);
 }

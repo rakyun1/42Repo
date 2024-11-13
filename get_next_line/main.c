@@ -6,13 +6,14 @@ int main(void)
 {
     // BUFFER_SIZE == 100
     // 1 == 10
-    char *result = get_next_line(1);
-    printf("%s\n", result);
+    // char *result = get_next_line(1);
+    // printf("%s\n", result);
     int fd = open("test.txt", O_RDONLY);
-    result = get_next_line(fd);
+	char *result = get_next_line(fd);
     while (result)
     {
         printf("%s\n", result);
+	    free(result);
         result = get_next_line(fd);
     }
 
