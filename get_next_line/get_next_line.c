@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:52:04 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/13 18:49:31 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/14 15:14:33 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*find_enter_in(t_list *node)
 	int		idx;
 
 	idx = ft_strchr(node->buffer, '\n');
-	if (idx)
+	if (idx || (!idx && node->buffer[0] == '\n'))
 	{
 		result = ft_strdup(node->buffer, idx + 1);
 		node->buffer += (idx + 1);
