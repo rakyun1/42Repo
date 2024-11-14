@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:11:44 by rakim             #+#    #+#             */
-/*   Updated: 2024/11/14 15:13:36 by rakim            ###   ########.fr       */
+/*   Updated: 2024/11/14 17:06:03 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strlen(const char *s)
 	return (length);
 }
 
-char	*ft_strjoin(char *origin, char *new)
+void	ft_strjoin(t_list *node)
 {
 	size_t	origin_len;
 	size_t	new_len;
@@ -30,22 +30,25 @@ char	*ft_strjoin(char *origin, char *new)
 	int		result_idx;
 	int		original_idx;
 
-	if (origin == NULL || new == NULL)
-		return (NULL);
-	origin_len = ft_strlen(origin);
-	new_len = ft_strlen(new);
+	origin_len = ft_strlen(node->buffer);
+	new_len = ft_strlen(node->temp);
 	result = (char *)malloc(origin_len + new_len + 1);
 	if (result == NULL)
-		return (NULL);
+	{
+		node->buffer = NULL;
+		return ;
+	}
 	result_idx = 0;
 	original_idx = 0;
-	while (origin[original_idx])
-		result[result_idx++] = origin[original_idx++];
+	while (node->buffer[original_idx])
+		result[result_idx++] = node->buffer[original_idx++];
 	original_idx = 0;
-	while (new[original_idx] != '\0')
-		result[result_idx++] = new[original_idx++];
+	while (node->temp[original_idx] != '\0')
+		result[result_idx++] = node->temp[original_idx++];
 	result[result_idx] = '\0';
-	return (result);
+	node->buffer = result;
+	free(node->buffer_for_free);
+	node->buffer_for_free = node->buffer;
 }
 
 char	*ft_strdup(const char *s, int enter_place)
