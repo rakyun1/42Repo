@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:34:24 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/25 14:48:25 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/26 20:14:48by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,23 @@ t_node	*make_new_node(int value)
 	return (result);
 }
 
-t_node	**make_stack_a(int length, char *input[])
+t_node	**make_stack(int length, char *input[])
 {
-	t_node 	**stack_a;
+	t_node 	**stack;
 	t_node	*current;
 	t_node	*temp;
 	int		idx;
 
+	if (length == 0)
+	{
+		stack = (t_node **)malloc(sizeof(t_node *));
+		*stack = NULL;
+		return (stack);
+	}
 	idx = 1;
-	stack_a = (t_node **)malloc(sizeof(t_node *));
-	*stack_a = make_new_node(ft_atoi(input[idx++]));
-	temp = *stack_a;
+	stack = (t_node **)malloc(sizeof(t_node *));
+	*stack = make_new_node(ft_atoi(input[idx++]));
+	temp = *stack;
 	while (idx < length)
 	{
 		current = make_new_node(ft_atoi(input[idx++]));
@@ -41,24 +47,5 @@ t_node	**make_stack_a(int length, char *input[])
 		current->prev_node = temp;
 		temp = temp->next_node;
 	}
-	return (stack_a);
-}
-
-t_node	**make_stack_b(int length)
-{
-	t_node **stack_b;
-	t_node	*temp;
-	int		count;
-
-	stack_b = (t_node **)malloc(sizeof(t_node *));
-	*stack_b = (t_node *)malloc(1 * sizeof(t_node));
-	temp = *stack_b;
-	count = 0;
-	while (count < length - 1)
-	{
-		temp->next_node = (t_node *)malloc(1 * sizeof(t_node));
-		temp = temp->next_node;
-		count++;
-	}
-	return (stack_b);
+	return (stack);
 }

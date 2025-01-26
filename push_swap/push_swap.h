@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:35:27 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/25 17:00:43 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/26 21:17:13 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,20 @@ typedef struct s_node
 	struct s_node *prev_node;
 }		t_node;
 
+typedef struct s_rank
+{
+	int	*rank;
+	int	length;
+}		t_rank;
+
+
 void	throw_error(void);
 int		is_digit(int c);
 int		ft_atoi(const char *nptr);
-t_node	**make_stack_a(int length, char *input[]);
-t_node	**make_stack_b(int length);
+t_node	**make_stack(int length, char *input[]);
+void	swap_top_element(t_node **stack);
+void	pop_push_top_element(t_node **from, t_node **to);
+void	rotation_stack(t_node **stack);
+void	reverse_rotation_stack(t_node **stack);
 
 #endif

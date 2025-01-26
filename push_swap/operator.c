@@ -6,12 +6,11 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:31:18 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/25 18:24:09 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/26 21:02:25 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	swap_top_element(t_node **stack)
 {
@@ -58,96 +57,186 @@ void	pop_push_top_element(t_node **from, t_node **to)
 	}
 }
 
-// 간단한 노드 생성 함수
-t_node	*create_node(int value)
+void	rotation_stack(t_node **stack)
 {
-	t_node	*new_node = malloc(sizeof(t_node));
-	if (!new_node)
-		return (NULL);
-	new_node->value = value;
-	new_node->next_node = NULL;
-	new_node->prev_node = NULL;
-	return (new_node);
-}
-t_node	*create_node_without_value()
-{
-	t_node	*new_node = malloc(sizeof(t_node));
-	if (!new_node)
-		return (NULL);
-	new_node->next_node = NULL;
-	new_node->prev_node = NULL;
-	return (new_node);
-}
+	t_node	*tail;
+	t_node	*head;
 
-// 스택 출력 함수
-void	print_stack(t_node *stack)
-{
-	t_node *temp = stack;
-	while (temp)
+	if ((*stack)->next_node == NULL)
+		return ;
+	tail = *stack;
+	while (tail->next_node)
 	{
-		if (!temp->value)
-			break;
-		printf("%d ", temp->value);
-		temp = temp->next_node;
+		tail = tail->next_node;
 	}
-	printf("\n");
+	head = *stack;
+	*stack = (*stack)->next_node;
+	(*stack)->prev_node = NULL;
+	tail->next_node = head;
+	head->prev_node = tail;
+	head->next_node = NULL;
 }
 
-int main(void)
+void	reverse_rotation_stack(t_node **stack)
 {
-	t_node *stack_a = create_node(1);
-	t_node *stack_b = create_node_without_value(1);
-	stack_a->next_node = create_node(2);
-	stack_a->next_node->prev_node = stack_a;
-	stack_a->next_node->next_node = create_node(3);
-	stack_a->next_node->next_node->prev_node = stack_a->next_node;
+	t_node	*tail;
 
-	printf("Before sa:\n");
-	print_stack(stack_a);
-
-	swap_top_element(&stack_a);
-
-	printf("After sa:\n");
-	print_stack(stack_a);
-
-	swap_top_element(&stack_a);
-	printf("\nbefore push:\n");
-	printf("stack a : ");
-	print_stack(stack_a);
-	printf("stack b : ");
-	print_stack(stack_b);
-
-	pop_push_top_element(&stack_a, &stack_b);
-
-	printf("\nAfter 1st push to b:\n");
-	printf("stack a : ");
-	print_stack(stack_a);
-	printf("stack b : ");
-	print_stack(stack_b);
-
-	pop_push_top_element(&stack_a, &stack_b);
-	printf("\nAfter 2nd push to b:\n");
-	printf("stack a : ");
-	print_stack(stack_a);
-	printf("stack b : ");
-	print_stack(stack_b);
-
-	pop_push_top_element(&stack_a, &stack_b);
-	printf("\nAfter 3nd push to b:\n");
-	printf("stack a : ");
-	print_stack(stack_a);
-	printf("stack b : ");
-	print_stack(stack_b);
-
-	pop_push_top_element(&stack_b, &stack_a);
-	printf("\nAfter 1nd push to a:\n");
-	printf("stack a : ");
-	print_stack(stack_a);
-	printf("stack b : ");
-	print_stack(stack_b);
-
-	return 0;
+	if (*stack == NULL || (*stack)->next_node == NULL)
+		return ;
+	tail = *stack;
+	while (tail->next_node)
+	{
+		tail = tail->next_node;
+	}
+	tail->prev_node->next_node = NULL;
+	(*stack)->prev_node = tail;
+	tail->prev_node = NULL;
+	tail->next_node = *stack;
+	*stack = tail;
 }
+
+// #include <stdio.h>
+// t_node	*make_new_node(int value)
+// {
+// 	t_node	*result;
+
+// 	result = (t_node *)malloc(1 * sizeof(t_node));
+// 	result->value = value;
+// 	result->next_node = NULL;
+// 	result->prev_node = NULL;
+// 	return (result);
+// }
+
+// void	print_stack(t_node *stack)
+// {
+// 	t_node *temp = stack;
+// 	while (temp)
+// 	{
+// 		if (!temp->value)
+// 			break;
+// 		printf("%d ", temp->value);
+// 		temp = temp->next_node;
+// 	}
+// 	printf("\n");
+// }
+
+// int main(void)
+// {
+// 	t_node *stack_a = make_new_node(1);
+// 	stack_a->next_node = make_new_node(2);
+// 	stack_a->next_node->prev_node = stack_a;
+// 	stack_a->next_node->next_node = make_new_node(3);
+// 	stack_a->next_node->next_node->prev_node = stack_a->next_node;
+// 	stack_a->next_node->next_node->next_node = make_new_node(4);
+// 	stack_a->next_node->next_node->next_node->prev_node = stack_a->next_node->next_node;
+
+// 	t_node *stack_b = NULL;
+
+// 	printf("Before sa:\n");
+// 	print_stack(stack_a);
+
+// 	swap_top_element(&stack_a);
+
+// 	printf("After sa:\n");
+// 	print_stack(stack_a);
+
+// 	swap_top_element(&stack_a);
+// 	printf("\nbefore push:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	pop_push_top_element(&stack_a, &stack_b);
+
+// 	printf("\nAfter 1st push to b:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	pop_push_top_element(&stack_a, &stack_b);
+// 	printf("\nAfter 2nd push to b:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	pop_push_top_element(&stack_a, &stack_b);
+// 	printf("\nAfter 3nd push to b:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	pop_push_top_element(&stack_b, &stack_a);
+// 	printf("\nAfter 1nd push to a:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	pop_push_top_element(&stack_a, &stack_b);
+// 	printf("\nAfter 1nd push to b:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+
+// 	pop_push_top_element(&stack_a, &stack_b);
+// 	printf("\nAfter 1nd push to b:\n");
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	printf("\nRotate stack b:\n");
+// 	rotation_stack(&stack_b);
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	printf("\nRotate stack b:\n");
+// 	rotation_stack(&stack_b);
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	printf("\nRotate stack b:\n");
+// 	rotation_stack(&stack_b);
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+
+// 	printf("\nRevers rotate stack b:\n");
+// 	reverse_rotation_stack(&stack_b);
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+
+// 	printf("\nRevers rotate stack b:\n");
+// 	reverse_rotation_stack(&stack_b);
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	printf("\nRevers rotate stack b:\n");
+// 	reverse_rotation_stack(&stack_b);
+// 	printf("stack a : ");
+// 	print_stack(stack_a);
+// 	printf("stack b : ");
+// 	print_stack(stack_b);
+
+// 	return 0;
+// }
 
 
 
