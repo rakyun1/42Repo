@@ -6,13 +6,13 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 20:01:14 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/24 20:30:16 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/27 15:21:08 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	throw_error()
+void	throw_error(void)
 {
 	write(1, "ERROR\n", 6);
 	exit(0);
