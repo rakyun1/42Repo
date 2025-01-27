@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:07:20 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/27 17:04:36 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/27 20:58:30 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,22 @@ void	*sort(int **arr, int length)
 		i++;
 	}
 	if (check_sorted == 0)
-		exit(0);
+		throw_error();
 }
 
-int	*sort_input(size_t length, char *input[])
+int	*sort_input(size_t length, t_node **stack)
 {
 	int		*result;
+	t_node	*temp;
 	size_t	idx;
 
-	result = (int *)malloc((length - 1) * sizeof(int));
+	result = (int *)malloc((length) * sizeof(int));
 	idx = 0;
-	while (idx < length - 1)
+	temp = *stack;
+	while (temp)
 	{
-		result[idx] = ft_atoi(input[idx + 1]);
+		result[idx] = temp->value;
+		temp = temp->next_node;
 		idx++;
 	}
 	sort(&result, (int)idx);

@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:21:44 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/27 15:22:13 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/27 20:24:53 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_node	*make_new_node(int value)
 	return (result);
 }
 
-t_node	**convert_rank(t_node **stack, t_rank rank)
+void	convert_rank(t_node **stack, t_rank rank)
 {
 	t_node	*current;
 	int		idx;
@@ -43,32 +43,39 @@ t_node	**convert_rank(t_node **stack, t_rank rank)
 		}
 		current = current->next_node;
 	}
-	return (stack);
 }
 
-t_node	**make_stack(int length, char *input[], t_rank rank)
+void	add_node_to_stack(t_node **stack, int value)
 {
-	t_node	**stack;
 	t_node	*current;
 	t_node	*temp;
-	int		idx;
 
-	if (length == 0)
-	{
-		stack = (t_node **)malloc(sizeof(t_node *));
-		*stack = NULL;
-		return (stack);
-	}
-	idx = 1;
-	stack = (t_node **)malloc(sizeof(t_node *));
-	*stack = make_new_node(ft_atoi(input[idx++]));
 	temp = *stack;
-	while (idx < length)
+	if (*stack == NULL)
 	{
-		current = make_new_node(ft_atoi(input[idx++]));
-		temp->next_node = current;
-		current->prev_node = temp;
+		*stack = make_new_node(value);
+		return ;
+	}
+	while (temp->next_node)
+	{
 		temp = temp->next_node;
 	}
-	return (convert_rank(stack, rank));
+	current = make_new_node(value);
+	temp->next_node = current;
+	current->prev_node = temp;
+}
+
+int	count_stack(t_node	**stack)
+{
+	t_node	*temp;
+	int		count;
+
+	temp = *stack;
+	count = 0;
+	while (temp)
+	{
+		temp = temp->next_node;
+		count++;
+	}
+	return (count);
 }
