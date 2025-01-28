@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 20:47:42 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/27 20:29:52 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:21:17 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	move_pointer(const char **nptr)
 
 int	ft_atoi(const char *nptr)
 {
-	int	sign;
-	int	result;
+	int			sign;
+	long long	result;
 
 	if (*nptr == '\0')
 		return (0);
@@ -68,5 +68,18 @@ int	ft_atoi(const char *nptr)
 		}
 		nptr++;
 	}
-	return (result * sign);
+	result = result * sign;
+	if (result > 2147483647 || result < -2147483648)
+		result = 0;
+	return ((int)result);
+}
+
+int	ft_strlen(const char *s)
+{
+	int	length;
+
+	length = 0;
+	while (s[length] != '\0')
+		length++;
+	return (length);
 }

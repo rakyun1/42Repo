@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:07:20 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/27 20:58:30 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/28 14:32:57 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ void	sort_stack(t_node **stack_a, t_node **stack_b, int length)
 	}
 }
 
-void	*sort(int **arr, int length)
+int	sort(int **arr, int length)
 {
 	int	temp;
 	int	i;
 	int	j;
 	int	check_sorted;
 
-	i = 0;
+	i = -1;
 	check_sorted = 0;
-	while (i < length - 1)
+	while (++i < (length - 1))
 	{
 		j = 0;
 		while (j < length - 1 - i)
@@ -76,21 +76,21 @@ void	*sort(int **arr, int length)
 				(*arr)[j] = (*arr)[j + 1];
 				(*arr)[j + 1] = temp;
 			}
+			else if ((*arr)[j] == (*arr)[j + 1])
+				return (-1);
 			j++;
 		}
-		i++;
 	}
-	if (check_sorted == 0)
-		throw_error();
+	return (check_sorted);
 }
 
-int	*sort_input(size_t length, t_node **stack)
+int	*sort_input(int length, t_node **stack)
 {
 	int		*result;
 	t_node	*temp;
-	size_t	idx;
+	int		idx;
 
-	result = (int *)malloc((length) * sizeof(int));
+	result = (int *)malloc((size_t)(length * (int)(sizeof(int))));
 	idx = 0;
 	temp = *stack;
 	while (temp)
@@ -99,6 +99,14 @@ int	*sort_input(size_t length, t_node **stack)
 		temp = temp->next_node;
 		idx++;
 	}
-	sort(&result, (int)idx);
+	idx = sort(&result, (int)idx);
+	if (idx == 0 || idx == -1)
+	{
+		free(result);
+		if (idx == -1)
+			throw_error(stack);
+		else
+			free_all(stack);
+	}
 	return (result);
 }

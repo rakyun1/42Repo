@@ -6,11 +6,17 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:21:44 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/27 20:24:53 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/28 15:10:22 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	init_stack(t_node ***stack)
+{
+	*stack = (t_node **)malloc(sizeof(t_node *));
+	**stack = NULL;
+}
 
 t_node	*make_new_node(int value)
 {

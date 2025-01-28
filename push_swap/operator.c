@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:31:18 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/27 15:23:09 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/28 15:13:17 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	swap_top_element(t_node **stack)
 		temp_first->next_node = NULL;
 	temp_second->next_node = temp_first;
 	(*stack) = temp_second;
+	write(1, "sa\n", 3);
 }
 
 void	pop_push_top_element(t_node **from, t_node **to, int division)
@@ -98,4 +99,5 @@ void	reverse_rotation_stack(t_node **stack)
 	tail->prev_node = NULL;
 	tail->next_node = *stack;
 	*stack = tail;
+	write(1, "rra\n", 4);
 }
