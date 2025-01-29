@@ -6,7 +6,7 @@
 /*   By: rakim <fkrdbs234@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 14:33:18 by rakim             #+#    #+#             */
-/*   Updated: 2025/01/28 16:35:20 by rakim            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:51:55 by rakim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void	sort_stack_low_number(t_node **stack_a, t_node **stack_b)
 				rotation_stack(stack_a);
 		}
 	}
-	if (stack_len <= 3)
+	if (stack_len == 3)
 		sort_stack_three_count(stack_a, 1, 2);
+	else if (stack_len == 4)
+		sort_stack_three_count(stack_a, 2, 3);
 	else
 		sort_stack_three_count(stack_a, 3, 4);
 	while ((*stack_b))
