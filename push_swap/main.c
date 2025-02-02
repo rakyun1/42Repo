@@ -50,7 +50,7 @@ int	main(int length, char *input[])
 	stack_a = NULL;
 	stack_b = NULL;
 	if (length <= 1)
-		throw_error(stack_a);
+		return ;
 	init_stack(&stack_a);
 	check_input(length, input, stack_a);
 	length = count_stack(stack_a);
